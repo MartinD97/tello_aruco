@@ -1,0 +1,263 @@
+[0.000000] (-) TimerEvent: {}
+[0.000758] (my_video_package) JobQueued: {'identifier': 'my_video_package', 'dependencies': OrderedDict()}
+[0.000999] (orbslam2) JobQueued: {'identifier': 'orbslam2', 'dependencies': OrderedDict()}
+[0.001099] (tello_control) JobQueued: {'identifier': 'tello_control', 'dependencies': OrderedDict()}
+[0.001124] (tello_msg) JobQueued: {'identifier': 'tello_msg', 'dependencies': OrderedDict()}
+[0.001320] (tello) JobQueued: {'identifier': 'tello', 'dependencies': OrderedDict([('tello_msg', '/root/docker_tello_ros2/tello_ws/install/tello_msg')])}
+[0.001961] (tello_msg) JobStarted: {'identifier': 'tello_msg'}
+[0.014086] (my_video_package) JobStarted: {'identifier': 'my_video_package'}
+[0.020701] (orbslam2) JobStarted: {'identifier': 'orbslam2'}
+[0.028077] (tello_control) JobStarted: {'identifier': 'tello_control'}
+[0.037506] (tello_msg) JobProgress: {'identifier': 'tello_msg', 'progress': 'cmake'}
+[0.038552] (tello_msg) JobProgress: {'identifier': 'tello_msg', 'progress': 'build'}
+[0.039539] (tello_msg) Command: {'cmd': ['/usr/bin/cmake', '--build', '/root/docker_tello_ros2/tello_ws/build/tello_msg', '--', '-j8', '-l8'], 'cwd': '/root/docker_tello_ros2/tello_ws/build/tello_msg', 'env': OrderedDict([('HOSTNAME', 'db7d364ff8cf'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:/opt/ros/foxy/lib'), ('HOME', '/root'), ('OLDPWD', '/root/docker_tello_ros2/tello_ws/tello_pkg/tello_pkg'), ('ROS_PYTHON_VERSION', '3'), ('_colcon_cd_root', '/root/ros2_install'), ('ROS_DISTRO', 'foxy'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XAUTHORITY', '/root/.Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/foxy'), ('PWD', '/root/docker_tello_ros2/tello_ws/build/tello_msg'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/foxy')]), 'shell': False}
+[0.046836] (my_video_package) JobProgress: {'identifier': 'my_video_package', 'progress': 'cmake'}
+[0.049694] (my_video_package) Command: {'cmd': ['/usr/bin/cmake', '/root/docker_tello_ros2/tello_ws/src/tello_pkg', '-DCMAKE_INSTALL_PREFIX=/root/docker_tello_ros2/tello_ws/install/my_video_package'], 'cwd': '/root/docker_tello_ros2/tello_ws/build/my_video_package', 'env': OrderedDict([('HOSTNAME', 'db7d364ff8cf'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:/opt/ros/foxy/lib'), ('HOME', '/root'), ('OLDPWD', '/root/docker_tello_ros2/tello_ws/tello_pkg/tello_pkg'), ('ROS_PYTHON_VERSION', '3'), ('_colcon_cd_root', '/root/ros2_install'), ('ROS_DISTRO', 'foxy'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XAUTHORITY', '/root/.Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/foxy'), ('PWD', '/root/docker_tello_ros2/tello_ws/build/my_video_package'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1')]), 'shell': False}
+[0.057253] (orbslam2) JobProgress: {'identifier': 'orbslam2', 'progress': 'cmake'}
+[0.057499] (orbslam2) Command: {'cmd': ['/usr/bin/cmake', '/root/docker_tello_ros2/tello_ws/tentone/tello-ros2/slam/src/orbslam2', '-DCMAKE_INSTALL_PREFIX=/root/docker_tello_ros2/tello_ws/install/orbslam2'], 'cwd': '/root/docker_tello_ros2/tello_ws/build/orbslam2', 'env': OrderedDict([('HOSTNAME', 'db7d364ff8cf'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:/opt/ros/foxy/lib'), ('HOME', '/root'), ('OLDPWD', '/root/docker_tello_ros2/tello_ws/tello_pkg/tello_pkg'), ('ROS_PYTHON_VERSION', '3'), ('_colcon_cd_root', '/root/ros2_install'), ('ROS_DISTRO', 'foxy'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XAUTHORITY', '/root/.Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/foxy'), ('PWD', '/root/docker_tello_ros2/tello_ws/build/orbslam2'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/foxy')]), 'shell': False}
+[0.067154] (tello_control) JobProgress: {'identifier': 'tello_control', 'progress': 'cmake'}
+[0.067286] (tello_control) JobProgress: {'identifier': 'tello_control', 'progress': 'build'}
+[0.067348] (tello_control) Command: {'cmd': ['/usr/bin/cmake', '--build', '/root/docker_tello_ros2/tello_ws/build/tello_control', '--', '-j8', '-l8'], 'cwd': '/root/docker_tello_ros2/tello_ws/build/tello_control', 'env': OrderedDict([('HOSTNAME', 'db7d364ff8cf'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:/opt/ros/foxy/lib'), ('HOME', '/root'), ('OLDPWD', '/root/docker_tello_ros2/tello_ws/tello_pkg/tello_pkg'), ('ROS_PYTHON_VERSION', '3'), ('_colcon_cd_root', '/root/ros2_install'), ('ROS_DISTRO', 'foxy'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XAUTHORITY', '/root/.Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/foxy'), ('PWD', '/root/docker_tello_ros2/tello_ws/build/tello_control'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/foxy')]), 'shell': False}
+[0.070961] (my_video_package) StdoutLine: {'line': b'-- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)\n'}
+[0.075169] (orbslam2) StdoutLine: {'line': b'-- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)\n'}
+[0.096120] (my_video_package) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[0.099138] (orbslam2) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[0.099922] (-) TimerEvent: {}
+[0.104520] (tello_msg) StdoutLine: {'line': b'[  2%] \x1b[34m\x1b[1mGenerating C code for ROS interfaces\x1b[0m\n'}
+[0.104955] (tello_msg) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_msg__cpp\x1b[0m\n'}
+[0.110646] (tello_control) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_control\x1b[0m\n'}
+[0.118510] (tello_msg) StdoutLine: {'line': b'[  4%] \x1b[34m\x1b[1mGenerating C++ code for ROS interfaces\x1b[0m\n'}
+[0.200109] (-) TimerEvent: {}
+[0.300734] (-) TimerEvent: {}
+[0.328764] (orbslam2) StdoutLine: {'line': b'-- Found rclcpp: 2.4.3 (/opt/ros/foxy/share/rclcpp/cmake)\n'}
+[0.331046] (my_video_package) StdoutLine: {'line': b'-- Found rclpy: 1.0.13 (/opt/ros/foxy/share/rclpy/cmake)\n'}
+[0.331747] (my_video_package) StdoutLine: {'line': b'-- Found sensor_msgs: 2.0.5 (/opt/ros/foxy/share/sensor_msgs/cmake)\n'}
+[0.357421] (my_video_package) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.362138] (my_video_package) StdoutLine: {'line': b'-- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)\n'}
+[0.375646] (orbslam2) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.380208] (orbslam2) StdoutLine: {'line': b'-- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)\n'}
+[0.401030] (-) TimerEvent: {}
+[0.446857] (tello_control) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/tello_control.dir/src/main.cpp.o\x1b[0m\n'}
+[0.501210] (-) TimerEvent: {}
+[0.539850] (my_video_package) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.565900] (orbslam2) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.601358] (-) TimerEvent: {}
+[0.627992] (orbslam2) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)\n'}
+[0.629492] (orbslam2) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.701548] (-) TimerEvent: {}
+[0.748886] (my_video_package) StdoutLine: {'line': b'-- Found cv_bridge: 3.0.7 (/opt/ros/foxy/share/cv_bridge/cmake)\n'}
+[0.801694] (-) TimerEvent: {}
+[0.818551] (orbslam2) StdoutLine: {'line': b'-- Found sensor_msgs: 2.0.5 (/opt/ros/foxy/share/sensor_msgs/cmake)\n'}
+[0.901825] (-) TimerEvent: {}
+[0.907339] (my_video_package) StderrLine: {'line': b"Error parsing '/root/docker_tello_ros2/tello_ws/src/tello_pkg/package.xml':\n"}
+[0.908020] (my_video_package) StderrLine: {'line': b'Traceback (most recent call last):\n'}
+[0.909075] (my_video_package) StderrLine: {'line': b'  File "/opt/ros/foxy/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py", line 143, in <module>\n'}
+[0.909211] (my_video_package) StderrLine: {'line': b'    main()\n'}
+[0.909512] (my_video_package) StderrLine: {'line': b'  File "/opt/ros/foxy/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py", line 52, in main\n'}
+[0.909620] (my_video_package) StderrLine: {'line': b'    raise e\n'}
+[0.909706] (my_video_package) StderrLine: {'line': b'  File "/opt/ros/foxy/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py", line 48, in main\n'}
+[0.909793] (my_video_package) StderrLine: {'line': b'    package = parse_package_string(\n'}
+[0.909958] (my_video_package) StderrLine: {'line': b'  File "/usr/local/lib/python3.8/dist-packages/catkin_pkg/package.py", line 786, in parse_package_string\n'}
+[0.910248] (my_video_package) StderrLine: {'line': b"    raise InvalidPackage('Error(s):%s' % (''.join(['\\n- %s' % e for e in errors])), filename)\n"}
+[0.910509] (my_video_package) StderrLine: {'line': b"catkin_pkg.package.InvalidPackage: Error(s) in package '/root/docker_tello_ros2/tello_ws/src/tello_pkg/package.xml':\n"}
+[0.910646] (my_video_package) StderrLine: {'line': b'Error(s):\n'}
+[0.910739] (my_video_package) StderrLine: {'line': b"- The generic dependency on 'rclpy' is redundant with: exec_depend\n"}
+[0.910832] (my_video_package) StderrLine: {'line': b"- The generic dependency on 'sensor_msgs' is redundant with: exec_depend\n"}
+[0.910920] (my_video_package) StderrLine: {'line': b"- The generic dependency on 'cv_bridge' is redundant with: exec_depend\n"}
+[0.918982] (my_video_package) StderrLine: {'line': b'CMake Error at /opt/ros/foxy/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:94 (message):\n'}
+[0.919322] (my_video_package) StderrLine: {'line': b'  execute_process(/usr/bin/python3\n'}
+[0.919421] (my_video_package) StderrLine: {'line': b'  /opt/ros/foxy/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py\n'}
+[0.919505] (my_video_package) StderrLine: {'line': b'  /root/docker_tello_ros2/tello_ws/src/tello_pkg/package.xml\n'}
+[0.919585] (my_video_package) StderrLine: {'line': b'  /root/docker_tello_ros2/tello_ws/build/my_video_package/ament_cmake_core/package.cmake)\n'}
+[0.919665] (my_video_package) StderrLine: {'line': b'  returned error code 1\n'}
+[0.919747] (my_video_package) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[0.919830] (my_video_package) StderrLine: {'line': b'  /opt/ros/foxy/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:49 (_ament_package_xml)\n'}
+[0.919907] (my_video_package) StderrLine: {'line': b'  /opt/ros/foxy/share/ament_cmake_core/cmake/core/ament_package.cmake:63 (ament_package_xml)\n'}
+[0.919983] (my_video_package) StderrLine: {'line': b'  CMakeLists.txt:20 (ament_package)\n'}
+[0.920063] (my_video_package) StderrLine: {'line': b'\n'}
+[0.920144] (my_video_package) StderrLine: {'line': b'\n'}
+[0.921178] (my_video_package) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[0.921411] (my_video_package) StdoutLine: {'line': b'See also "/root/docker_tello_ros2/tello_ws/build/my_video_package/CMakeFiles/CMakeOutput.log".\n'}
+[0.931561] (my_video_package) CommandEnded: {'returncode': 1}
+[0.932039] (my_video_package) JobEnded: {'identifier': 'my_video_package', 'rc': 1}
+[0.937974] (tello_msg) StdoutLine: {'line': b'[  4%] Built target tello_msg__cpp\n'}
+[0.956183] (tello_msg) StdoutLine: {'line': b'[  6%] \x1b[34m\x1b[1mGenerating C++ type support for eProsima Fast-RTPS\x1b[0m\n'}
+[0.958787] (tello_msg) StdoutLine: {'line': b'[  8%] \x1b[34m\x1b[1mGenerating C++ introspection for ROS interfaces\x1b[0m\n'}
+[0.969383] (tello_msg) StdoutLine: {'line': b'[ 10%] \x1b[34m\x1b[1mGenerating C++ type support dispatch for ROS interfaces\x1b[0m\n'}
+[0.981225] (orbslam2) StdoutLine: {'line': b'-- Found visualization_msgs: 2.0.5 (/opt/ros/foxy/share/visualization_msgs/cmake)\n'}
+[0.984976] (tello_msg) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_msg__rosidl_generator_c\x1b[0m\n'}
+[1.001967] (-) TimerEvent: {}
+[1.018086] (tello_msg) StdoutLine: {'line': b'[ 12%] \x1b[32mBuilding C object CMakeFiles/tello_msg__rosidl_generator_c.dir/rosidl_generator_c/tello_msg/msg/detail/tello_wifi_config__functions.c.o\x1b[0m\n'}
+[1.030288] (tello_msg) StdoutLine: {'line': b'[ 14%] \x1b[32mBuilding C object CMakeFiles/tello_msg__rosidl_generator_c.dir/rosidl_generator_c/tello_msg/msg/detail/tello_status__functions.c.o\x1b[0m\n'}
+[1.033402] (tello_msg) StdoutLine: {'line': b'[ 17%] \x1b[32mBuilding C object CMakeFiles/tello_msg__rosidl_generator_c.dir/rosidl_generator_c/tello_msg/msg/detail/tello_id__functions.c.o\x1b[0m\n'}
+[1.084163] (orbslam2) StdoutLine: {'line': b'-- Found cv_bridge: 3.0.7 (/opt/ros/foxy/share/cv_bridge/cmake)\n'}
+[1.102085] (-) TimerEvent: {}
+[1.121797] (orbslam2) StdoutLine: {'line': b'-- Found message_filters: 3.2.7 (/opt/ros/foxy/share/message_filters/cmake)\n'}
+[1.164184] (orbslam2) StderrLine: {'line': b'CMake Error at CMakeLists.txt:24 (find_package):\n'}
+[1.164924] (orbslam2) StderrLine: {'line': b'  Could not find a configuration file for package "OpenCV" that is compatible\n'}
+[1.165046] (orbslam2) StderrLine: {'line': b'  with requested version "3".\n'}
+[1.165316] (orbslam2) StderrLine: {'line': b'\n'}
+[1.165440] (orbslam2) StderrLine: {'line': b'  The following configuration files were considered but not accepted:\n'}
+[1.165527] (orbslam2) StderrLine: {'line': b'\n'}
+[1.165612] (orbslam2) StderrLine: {'line': b'    /usr/lib/x86_64-linux-gnu/cmake/opencv4/OpenCVConfig.cmake, version: 4.2.0\n'}
+[1.165697] (orbslam2) StderrLine: {'line': b'    /lib/x86_64-linux-gnu/cmake/opencv4/OpenCVConfig.cmake, version: 4.2.0\n'}
+[1.165779] (orbslam2) StderrLine: {'line': b'\n'}
+[1.165866] (orbslam2) StderrLine: {'line': b'\n'}
+[1.165955] (orbslam2) StderrLine: {'line': b'\n'}
+[1.166060] (orbslam2) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[1.166176] (orbslam2) StdoutLine: {'line': b'See also "/root/docker_tello_ros2/tello_ws/build/orbslam2/CMakeFiles/CMakeOutput.log".\n'}
+[1.166277] (orbslam2) StdoutLine: {'line': b'See also "/root/docker_tello_ros2/tello_ws/build/orbslam2/CMakeFiles/CMakeError.log".\n'}
+[1.187936] (orbslam2) JobEnded: {'identifier': 'orbslam2', 'rc': 'SIGINT'}
+[1.202261] (-) TimerEvent: {}
+[1.228756] (tello_msg) StdoutLine: {'line': b'[ 19%] \x1b[32m\x1b[1mLinking C shared library libtello_msg__rosidl_generator_c.so\x1b[0m\n'}
+[1.302398] (-) TimerEvent: {}
+[1.334271] (tello_msg) StdoutLine: {'line': b'[ 19%] Built target tello_msg__rosidl_generator_c\n'}
+[1.349564] (tello_msg) StdoutLine: {'line': b'[ 21%] \x1b[34m\x1b[1mGenerating C introspection for ROS interfaces\x1b[0m\n'}
+[1.358639] (tello_msg) StdoutLine: {'line': b'[ 23%] \x1b[34m\x1b[1mGenerating C type support dispatch for ROS interfaces\x1b[0m\n'}
+[1.404203] (-) TimerEvent: {}
+[1.507389] (-) TimerEvent: {}
+[1.608459] (-) TimerEvent: {}
+[1.709012] (-) TimerEvent: {}
+[1.809480] (-) TimerEvent: {}
+[1.818477] (tello_msg) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_msg__rosidl_typesupport_introspection_cpp\x1b[0m\n'}
+[1.823083] (tello_msg) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_msg__rosidl_typesupport_cpp\x1b[0m\n'}
+[1.832718] (tello_msg) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_msg__rosidl_typesupport_fastrtps_cpp\x1b[0m\n'}
+[1.841531] (tello_msg) StdoutLine: {'line': b'[ 25%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/tello_msg/msg/detail/tello_id__type_support.cpp.o\x1b[0m\n'}
+[1.842698] (tello_msg) StdoutLine: {'line': b'[ 27%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/tello_msg/msg/detail/tello_status__type_support.cpp.o\x1b[0m\n'}
+[1.847059] (tello_msg) StdoutLine: {'line': b'[ 29%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/tello_msg/msg/detail/tello_wifi_config__type_support.cpp.o\x1b[0m\n'}
+[1.852121] (tello_msg) StdoutLine: {'line': b'[ 31%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/tello_msg/msg/tello_status__type_support.cpp.o\x1b[0m\n'}
+[1.863980] (tello_msg) StdoutLine: {'line': b'[ 34%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/tello_msg/msg/tello_id__type_support.cpp.o\x1b[0m\n'}
+[1.913560] (-) TimerEvent: {}
+[2.015133] (-) TimerEvent: {}
+[2.042264] (tello_msg) StdoutLine: {'line': b'[ 36%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/tello_msg/msg/detail/dds_fastrtps/tello_status__type_support.cpp.o\x1b[0m\n'}
+[2.115416] (-) TimerEvent: {}
+[2.216576] (-) TimerEvent: {}
+[2.317752] (-) TimerEvent: {}
+[2.327186] (tello_msg) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_msg__rosidl_typesupport_c\x1b[0m\n'}
+[2.389278] (tello_msg) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_msg__rosidl_typesupport_introspection_c\x1b[0m\n'}
+[2.417937] (-) TimerEvent: {}
+[2.458118] (tello_msg) StdoutLine: {'line': b'[ 38%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_c.dir/rosidl_typesupport_c/tello_msg/msg/tello_status__type_support.cpp.o\x1b[0m\n'}
+[2.483342] (tello_msg) StdoutLine: {'line': b'[ 40%] \x1b[32mBuilding C object CMakeFiles/tello_msg__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/tello_msg/msg/detail/tello_status__type_support.c.o\x1b[0m\n'}
+[2.518087] (-) TimerEvent: {}
+[2.620604] (-) TimerEvent: {}
+[2.722182] (-) TimerEvent: {}
+[2.805728] (tello_msg) StdoutLine: {'line': b'[ 42%] \x1b[32mBuilding C object CMakeFiles/tello_msg__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/tello_msg/msg/detail/tello_id__type_support.c.o\x1b[0m\n'}
+[2.822341] (-) TimerEvent: {}
+[2.829904] (tello_msg) StdoutLine: {'line': b'[ 44%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/tello_msg/msg/tello_wifi_config__type_support.cpp.o\x1b[0m\n'}
+[2.833085] (tello_msg) StdoutLine: {'line': b'[ 46%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_c.dir/rosidl_typesupport_c/tello_msg/msg/tello_id__type_support.cpp.o\x1b[0m\n'}
+[2.859326] (tello_msg) StdoutLine: {'line': b'[ 48%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_c.dir/rosidl_typesupport_c/tello_msg/msg/tello_wifi_config__type_support.cpp.o\x1b[0m\n'}
+[2.869907] (tello_msg) StdoutLine: {'line': b'[ 51%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/tello_msg/msg/detail/dds_fastrtps/tello_id__type_support.cpp.o\x1b[0m\n'}
+[2.874730] (tello_msg) StdoutLine: {'line': b'[ 53%] \x1b[32mBuilding C object CMakeFiles/tello_msg__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/tello_msg/msg/detail/tello_wifi_config__type_support.c.o\x1b[0m\n'}
+[2.909296] (tello_msg) StdoutLine: {'line': b'[ 57%] \x1b[32m\x1b[1mLinking CXX shared library libtello_msg__rosidl_typesupport_c.so\x1b[0m\n'}
+[2.909673] (tello_msg) StdoutLine: {'line': b'[ 57%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/tello_msg/msg/detail/dds_fastrtps/tello_wifi_config__type_support.cpp.o\x1b[0m\n'}
+[2.915043] (tello_msg) StdoutLine: {'line': b'[ 59%] \x1b[32m\x1b[1mLinking CXX shared library libtello_msg__rosidl_typesupport_introspection_cpp.so\x1b[0m\n'}
+[2.922512] (-) TimerEvent: {}
+[2.934159] (tello_msg) StdoutLine: {'line': b'[ 61%] \x1b[32m\x1b[1mLinking C shared library libtello_msg__rosidl_typesupport_introspection_c.so\x1b[0m\n'}
+[2.992352] (tello_msg) StdoutLine: {'line': b'[ 61%] Built target tello_msg__rosidl_typesupport_introspection_c\n'}
+[2.992809] (tello_msg) StdoutLine: {'line': b'[ 61%] Built target tello_msg__rosidl_typesupport_c\n'}
+[3.023151] (-) TimerEvent: {}
+[3.046614] (tello_msg) StdoutLine: {'line': b'[ 61%] Built target tello_msg__rosidl_typesupport_introspection_cpp\n'}
+[3.123351] (-) TimerEvent: {}
+[3.224518] (-) TimerEvent: {}
+[3.257523] (tello_msg) StdoutLine: {'line': b'[ 63%] \x1b[32m\x1b[1mLinking CXX shared library libtello_msg__rosidl_typesupport_cpp.so\x1b[0m\n'}
+[3.317256] (tello_msg) StdoutLine: {'line': b'[ 63%] Built target tello_msg__rosidl_typesupport_cpp\n'}
+[3.324659] (-) TimerEvent: {}
+[3.425238] (-) TimerEvent: {}
+[3.459057] (tello_msg) StdoutLine: {'line': b'[ 65%] \x1b[32m\x1b[1mLinking CXX shared library libtello_msg__rosidl_typesupport_fastrtps_cpp.so\x1b[0m\n'}
+[3.525467] (-) TimerEvent: {}
+[3.580763] (tello_msg) StdoutLine: {'line': b'[ 65%] Built target tello_msg__rosidl_typesupport_fastrtps_cpp\n'}
+[3.594376] (tello_msg) StdoutLine: {'line': b'[ 68%] \x1b[34m\x1b[1mGenerating C type support for eProsima Fast-RTPS\x1b[0m\n'}
+[3.625653] (-) TimerEvent: {}
+[3.726111] (-) TimerEvent: {}
+[3.826632] (-) TimerEvent: {}
+[3.927105] (-) TimerEvent: {}
+[4.027574] (-) TimerEvent: {}
+[4.128033] (-) TimerEvent: {}
+[4.181119] (tello_msg) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_msg__rosidl_typesupport_fastrtps_c\x1b[0m\n'}
+[4.203144] (tello_msg) StdoutLine: {'line': b'[ 74%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/tello_msg/msg/detail/tello_status__type_support_c.cpp.o\x1b[0m\n'}
+[4.203411] (tello_msg) StdoutLine: {'line': b'[ 74%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/tello_msg/msg/detail/tello_id__type_support_c.cpp.o\x1b[0m\n'}
+[4.203506] (tello_msg) StdoutLine: {'line': b'[ 74%] \x1b[32mBuilding CXX object CMakeFiles/tello_msg__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/tello_msg/msg/detail/tello_wifi_config__type_support_c.cpp.o\x1b[0m\n'}
+[4.228246] (-) TimerEvent: {}
+[4.328829] (-) TimerEvent: {}
+[4.429382] (-) TimerEvent: {}
+[4.530453] (-) TimerEvent: {}
+[4.631089] (-) TimerEvent: {}
+[4.731640] (-) TimerEvent: {}
+[4.832137] (-) TimerEvent: {}
+[4.932617] (-) TimerEvent: {}
+[4.957728] (tello_msg) StdoutLine: {'line': b'[ 76%] \x1b[32m\x1b[1mLinking CXX shared library libtello_msg__rosidl_typesupport_fastrtps_c.so\x1b[0m\n'}
+[5.032859] (-) TimerEvent: {}
+[5.065530] (tello_msg) StdoutLine: {'line': b'[ 76%] Built target tello_msg__rosidl_typesupport_fastrtps_c\n'}
+[5.078917] (tello_msg) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_msg\x1b[0m\n'}
+[5.090011] (tello_msg) StdoutLine: {'line': b'[ 76%] Built target tello_msg\n'}
+[5.102884] (tello_msg) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_msg__py\x1b[0m\n'}
+[5.116857] (tello_msg) StdoutLine: {'line': b'[ 78%] \x1b[34m\x1b[1mGenerating Python code for ROS interfaces\x1b[0m\n'}
+[5.133097] (-) TimerEvent: {}
+[5.233624] (-) TimerEvent: {}
+[5.334083] (-) TimerEvent: {}
+[5.434648] (-) TimerEvent: {}
+[5.535214] (-) TimerEvent: {}
+[5.635907] (-) TimerEvent: {}
+[5.736408] (-) TimerEvent: {}
+[5.836909] (-) TimerEvent: {}
+[5.937589] (-) TimerEvent: {}
+[6.038137] (-) TimerEvent: {}
+[6.138627] (-) TimerEvent: {}
+[6.239232] (-) TimerEvent: {}
+[6.339899] (-) TimerEvent: {}
+[6.390478] (tello_msg) StdoutLine: {'line': b'[ 78%] Built target tello_msg__py\n'}
+[6.405433] (tello_msg) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_msg__python\x1b[0m\n'}
+[6.440053] (-) TimerEvent: {}
+[6.474375] (tello_msg) StdoutLine: {'line': b'[ 85%] \x1b[32mBuilding C object CMakeFiles/tello_msg__python.dir/rosidl_generator_py/tello_msg/msg/_tello_wifi_config_s.c.o\x1b[0m\n'}
+[6.474634] (tello_msg) StdoutLine: {'line': b'[ 85%] \x1b[32mBuilding C object CMakeFiles/tello_msg__python.dir/rosidl_generator_py/tello_msg/msg/_tello_status_s.c.o\x1b[0m\n'}
+[6.474708] (tello_msg) StdoutLine: {'line': b'[ 85%] \x1b[32mBuilding C object CMakeFiles/tello_msg__python.dir/rosidl_generator_py/tello_msg/msg/_tello_id_s.c.o\x1b[0m\n'}
+[6.540190] (-) TimerEvent: {}
+[6.640623] (-) TimerEvent: {}
+[6.660986] (tello_msg) StdoutLine: {'line': b'[ 87%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/tello_msg/libtello_msg__python.so\x1b[0m\n'}
+[6.705529] (tello_msg) StdoutLine: {'line': b'[ 87%] Built target tello_msg__python\n'}
+[6.718365] (tello_msg) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_msg__rosidl_typesupport_introspection_c__pyext\x1b[0m\n'}
+[6.718770] (tello_msg) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_msg__rosidl_typesupport_fastrtps_c__pyext\x1b[0m\n'}
+[6.720176] (tello_msg) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target tello_msg__rosidl_typesupport_c__pyext\x1b[0m\n'}
+[6.738425] (tello_msg) StdoutLine: {'line': b'[ 89%] \x1b[32mBuilding C object CMakeFiles/tello_msg__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/tello_msg/_tello_msg_s.ep.rosidl_typesupport_introspection_c.c.o\x1b[0m\n'}
+[6.740785] (-) TimerEvent: {}
+[6.743956] (tello_msg) StdoutLine: {'line': b'[ 91%] \x1b[32mBuilding C object CMakeFiles/tello_msg__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/tello_msg/_tello_msg_s.ep.rosidl_typesupport_fastrtps_c.c.o\x1b[0m\n'}
+[6.744284] (tello_msg) StdoutLine: {'line': b'[ 93%] \x1b[32mBuilding C object CMakeFiles/tello_msg__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/tello_msg/_tello_msg_s.ep.rosidl_typesupport_c.c.o\x1b[0m\n'}
+[6.841341] (-) TimerEvent: {}
+[6.865732] (tello_msg) StdoutLine: {'line': b'[ 95%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/tello_msg/tello_msg_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so\x1b[0m\n'}
+[6.875410] (tello_msg) StdoutLine: {'line': b'[ 97%] \x1b[32m\x1b[1mLinking CXX shared library rosidl_generator_py/tello_msg/tello_msg_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so\x1b[0m\n'}
+[6.878987] (tello_msg) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/tello_msg/tello_msg_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so\x1b[0m\n'}
+[6.908292] (tello_msg) StdoutLine: {'line': b'[100%] Built target tello_msg__rosidl_typesupport_introspection_c__pyext\n'}
+[6.924657] (tello_msg) StdoutLine: {'line': b'[100%] Built target tello_msg__rosidl_typesupport_c__pyext\n'}
+[6.941360] (-) TimerEvent: {}
+[6.952535] (tello_msg) StdoutLine: {'line': b'[100%] Built target tello_msg__rosidl_typesupport_fastrtps_c__pyext\n'}
+[6.964837] (tello_msg) JobEnded: {'identifier': 'tello_msg', 'rc': 'SIGINT'}
+[7.041662] (-) TimerEvent: {}
+[7.142194] (-) TimerEvent: {}
+[7.242744] (-) TimerEvent: {}
+[7.343379] (-) TimerEvent: {}
+[7.443965] (-) TimerEvent: {}
+[7.544544] (-) TimerEvent: {}
+[7.645043] (-) TimerEvent: {}
+[7.745756] (-) TimerEvent: {}
+[7.846207] (-) TimerEvent: {}
+[7.946831] (-) TimerEvent: {}
+[8.047552] (-) TimerEvent: {}
+[8.148303] (-) TimerEvent: {}
+[8.248751] (-) TimerEvent: {}
+[8.349335] (-) TimerEvent: {}
+[8.450098] (-) TimerEvent: {}
+[8.538425] (tello_control) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable tello_control\x1b[0m\n'}
+[8.550369] (-) TimerEvent: {}
+[8.650848] (-) TimerEvent: {}
+[8.751490] (-) TimerEvent: {}
+[8.852031] (-) TimerEvent: {}
+[8.952454] (-) TimerEvent: {}
+[9.052890] (-) TimerEvent: {}
+[9.153284] (-) TimerEvent: {}
+[9.253766] (-) TimerEvent: {}
+[9.354324] (-) TimerEvent: {}
+[9.446369] (tello_control) StdoutLine: {'line': b'[100%] Built target tello_control\n'}
+[9.454665] (-) TimerEvent: {}
+[9.460916] (tello_control) JobEnded: {'identifier': 'tello_control', 'rc': 'SIGINT'}
+[9.472919] (tello) JobSkipped: {'identifier': 'tello'}
+[9.473051] (-) EventReactorShutdown: {}

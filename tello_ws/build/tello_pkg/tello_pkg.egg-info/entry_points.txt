@@ -1,0 +1,4 @@
+[console_scripts]
+detect_marker = tello_pkg.detect_marker:main
+frame_pub = tello_pkg.frame_pub:main
+

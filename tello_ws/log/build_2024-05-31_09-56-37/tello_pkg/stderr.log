@@ -1,0 +1,5 @@
+  File "/root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/python3.8/site-packages/tello_pkg/frame_pub.py", line 1
+    import os rclpy
+              ^
+SyntaxError: invalid syntax
+

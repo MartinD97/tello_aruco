@@ -1,0 +1,49 @@
+[0.846s] Invoking command in '/root/docker_tello_ros2/tello_ws/src/tello_pkg': PYTHONPATH=/root/docker_tello_ros2/tello_ws/build/tello_pkg/prefix_override:/root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/tello_pkg build --build-base /root/docker_tello_ros2/tello_ws/build/tello_pkg/build install --record /root/docker_tello_ros2/tello_ws/build/tello_pkg/install.log --install-scripts $base/lib/tello_pkg --single-version-externally-managed install_data
+[0.996s] running egg_info
+[0.996s] creating ../../build/tello_pkg/tello_pkg.egg-info
+[0.996s] writing ../../build/tello_pkg/tello_pkg.egg-info/PKG-INFO
+[1.001s] writing dependency_links to ../../build/tello_pkg/tello_pkg.egg-info/dependency_links.txt
+[1.001s] writing entry points to ../../build/tello_pkg/tello_pkg.egg-info/entry_points.txt
+[1.001s] writing requirements to ../../build/tello_pkg/tello_pkg.egg-info/requires.txt
+[1.001s] writing top-level names to ../../build/tello_pkg/tello_pkg.egg-info/top_level.txt
+[1.009s] writing manifest file '../../build/tello_pkg/tello_pkg.egg-info/SOURCES.txt'
+[1.043s] reading manifest file '../../build/tello_pkg/tello_pkg.egg-info/SOURCES.txt'
+[1.044s] writing manifest file '../../build/tello_pkg/tello_pkg.egg-info/SOURCES.txt'
+[1.044s] running build
+[1.044s] running build_py
+[1.044s] creating /root/docker_tello_ros2/tello_ws/build/tello_pkg/build
+[1.045s] creating /root/docker_tello_ros2/tello_ws/build/tello_pkg/build/lib
+[1.046s] creating /root/docker_tello_ros2/tello_ws/build/tello_pkg/build/lib/tello_pkg
+[1.047s] copying tello_pkg/detect_marker_template.py -> /root/docker_tello_ros2/tello_ws/build/tello_pkg/build/lib/tello_pkg
+[1.048s] copying tello_pkg/frame_pub.py -> /root/docker_tello_ros2/tello_ws/build/tello_pkg/build/lib/tello_pkg
+[1.049s] copying tello_pkg/detect_marker.py -> /root/docker_tello_ros2/tello_ws/build/tello_pkg/build/lib/tello_pkg
+[1.049s] copying tello_pkg/__init__.py -> /root/docker_tello_ros2/tello_ws/build/tello_pkg/build/lib/tello_pkg
+[1.049s] running install
+[1.050s] running install_lib
+[1.051s] creating /root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/python3.8/site-packages/tello_pkg
+[1.052s] copying /root/docker_tello_ros2/tello_ws/build/tello_pkg/build/lib/tello_pkg/detect_marker_template.py -> /root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/python3.8/site-packages/tello_pkg
+[1.052s] copying /root/docker_tello_ros2/tello_ws/build/tello_pkg/build/lib/tello_pkg/frame_pub.py -> /root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/python3.8/site-packages/tello_pkg
+[1.052s] copying /root/docker_tello_ros2/tello_ws/build/tello_pkg/build/lib/tello_pkg/detect_marker.py -> /root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/python3.8/site-packages/tello_pkg
+[1.052s] copying /root/docker_tello_ros2/tello_ws/build/tello_pkg/build/lib/tello_pkg/__init__.py -> /root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/python3.8/site-packages/tello_pkg
+[1.053s] byte-compiling /root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/python3.8/site-packages/tello_pkg/detect_marker_template.py to detect_marker_template.cpython-38.pyc
+[1.056s] byte-compiling /root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/python3.8/site-packages/tello_pkg/frame_pub.py to frame_pub.cpython-38.pyc
+[1.056s] byte-compiling /root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/python3.8/site-packages/tello_pkg/detect_marker.py to detect_marker.cpython-38.pyc
+[1.057s]   File "/root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/python3.8/site-packages/tello_pkg/frame_pub.py", line 1
+[1.057s]     import os rclpy
+[1.057s]               ^
+[1.057s] SyntaxError: invalid syntax
+[1.057s] 
+[1.057s] byte-compiling /root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/python3.8/site-packages/tello_pkg/__init__.py to __init__.cpython-38.pyc
+[1.058s] running install_data
+[1.058s] creating /root/docker_tello_ros2/tello_ws/install/tello_pkg/share/ament_index
+[1.058s] creating /root/docker_tello_ros2/tello_ws/install/tello_pkg/share/ament_index/resource_index
+[1.059s] creating /root/docker_tello_ros2/tello_ws/install/tello_pkg/share/ament_index/resource_index/packages
+[1.059s] copying resource/tello_pkg -> /root/docker_tello_ros2/tello_ws/install/tello_pkg/share/ament_index/resource_index/packages
+[1.060s] copying package.xml -> /root/docker_tello_ros2/tello_ws/install/tello_pkg/share/tello_pkg
+[1.060s] running install_egg_info
+[1.061s] Copying ../../build/tello_pkg/tello_pkg.egg-info to /root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/python3.8/site-packages/tello_pkg-0.0.0-py3.8.egg-info
+[1.063s] running install_scripts
+[1.080s] Installing detect_marker script to /root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/tello_pkg
+[1.081s] Installing frame_pub script to /root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/tello_pkg
+[1.081s] writing list of installed files to '/root/docker_tello_ros2/tello_ws/build/tello_pkg/install.log'
+[1.099s] Invoked command in '/root/docker_tello_ros2/tello_ws/src/tello_pkg' returned '0': PYTHONPATH=/root/docker_tello_ros2/tello_ws/build/tello_pkg/prefix_override:/root/docker_tello_ros2/tello_ws/install/tello_pkg/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/tello_pkg build --build-base /root/docker_tello_ros2/tello_ws/build/tello_pkg/build install --record /root/docker_tello_ros2/tello_ws/build/tello_pkg/install.log --install-scripts $base/lib/tello_pkg --single-version-externally-managed install_data

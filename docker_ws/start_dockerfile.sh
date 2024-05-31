@@ -8,6 +8,6 @@ docker run --rm -it\
  -v ~/.Xauthority:/root/.Xauthority \
  -e XAUTHORITY=/root/.Xauthority \
  -v /dev/video0:/dev/video0 \
- -v ~/docker_tello_ros2/tello_ws:/root/tello_ws/\
+ -v ~/docker_tello_ros2:/root/docker_tello_ros2/\
  --name tello \
  $IMAGE bash

@@ -2,12 +2,12 @@ FROM osrf/ros:foxy-desktop
 
 RUN apt-get -y update && apt-get install -y git
 RUN apt-get -y upgrade
-WORKDIR /root/tello_ws
-RUN git clone https://github.com/tentone/tello-ros2.git
+WORKDIR /root/docker_tello_ros2
+#RUN git clone https://github.com/tentone/tello-ros2.git
 
 ## install.sh
-RUN apt install -y build-essential gdb
 RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get install -y build-essential gdb
 RUN apt install -y locales
 RUN locale-gen en_US en_US.UTF-8
 RUN update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
@@ -37,18 +37,9 @@ RUN cd libs
 RUN apt install -y cmake gcc g++ python3-dev python3-numpy libavcodec-dev libavformat-dev libswscale-dev libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev libgtk-3-dev libpng-dev libjpeg-dev libopenexr-dev libtiff-dev libwebp-dev
 RUN cd ~
 RUN apt install -y git
+RUN apt-get -y update && apt-get -y upgrade
 RUN git clone https://github.com/opencv/opencv.git
 RUN cd opencv
 #RUN git fetch
 #RUN git checkout 3.4
 RUN cmake
-#RUN mkdir build
-#RUN cd build
-#RUN make install -j8
-
-#cameracalib.sh
-RUN apt install -y ros-foxy-camera-calibration ros-foxy-camera-calibration-parsers ros-foxy-camera-info-manager ros-foxy-launch-testing-ament-cmake
-
-#extra
-RUN sudo usermod -aG video root
-RUN sudo apt install -y cheese

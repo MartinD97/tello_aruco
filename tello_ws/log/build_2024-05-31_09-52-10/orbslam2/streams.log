@@ -1,0 +1,27 @@
+[0.045s] Invoking command in '/root/docker_tello_ros2/tello_ws/build/orbslam2': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /root/docker_tello_ros2/tello_ws/tentone/tello-ros2/slam/src/orbslam2 -DCMAKE_INSTALL_PREFIX=/root/docker_tello_ros2/tello_ws/install/orbslam2
+[0.054s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.078s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.308s] -- Found rclcpp: 2.4.3 (/opt/ros/foxy/share/rclcpp/cmake)
+[0.355s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.359s] -- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[0.545s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.607s] -- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+[0.608s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.798s] -- Found sensor_msgs: 2.0.5 (/opt/ros/foxy/share/sensor_msgs/cmake)
+[0.960s] -- Found visualization_msgs: 2.0.5 (/opt/ros/foxy/share/visualization_msgs/cmake)
+[1.063s] -- Found cv_bridge: 3.0.7 (/opt/ros/foxy/share/cv_bridge/cmake)
+[1.101s] -- Found message_filters: 3.2.7 (/opt/ros/foxy/share/message_filters/cmake)
+[1.144s] CMake Error at CMakeLists.txt:24 (find_package):
+[1.144s]   Could not find a configuration file for package "OpenCV" that is compatible
+[1.144s]   with requested version "3".
+[1.144s] 
+[1.144s]   The following configuration files were considered but not accepted:
+[1.144s] 
+[1.144s]     /usr/lib/x86_64-linux-gnu/cmake/opencv4/OpenCVConfig.cmake, version: 4.2.0
+[1.145s]     /lib/x86_64-linux-gnu/cmake/opencv4/OpenCVConfig.cmake, version: 4.2.0
+[1.145s] 
+[1.145s] 
+[1.145s] 
+[1.145s] -- Configuring incomplete, errors occurred!
+[1.145s] See also "/root/docker_tello_ros2/tello_ws/build/orbslam2/CMakeFiles/CMakeOutput.log".
+[1.145s] See also "/root/docker_tello_ros2/tello_ws/build/orbslam2/CMakeFiles/CMakeError.log".

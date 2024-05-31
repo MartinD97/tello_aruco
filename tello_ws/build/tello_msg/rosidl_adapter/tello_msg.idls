@@ -1,0 +1,3 @@
+/root/docker_tello_ros2/tello_ws/build/tello_msg/rosidl_adapter/tello_msg:msg/TelloStatus.idl
+/root/docker_tello_ros2/tello_ws/build/tello_msg/rosidl_adapter/tello_msg:msg/TelloID.idl
+/root/docker_tello_ros2/tello_ws/build/tello_msg/rosidl_adapter/tello_msg:msg/TelloWifiConfig.idl

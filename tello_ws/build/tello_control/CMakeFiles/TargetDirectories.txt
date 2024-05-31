@@ -1,0 +1,10 @@
+/root/docker_tello_ros2/tello_ws/build/tello_control/CMakeFiles/install/strip.dir
+/root/docker_tello_ros2/tello_ws/build/tello_control/CMakeFiles/install/local.dir
+/root/docker_tello_ros2/tello_ws/build/tello_control/CMakeFiles/install.dir
+/root/docker_tello_ros2/tello_ws/build/tello_control/CMakeFiles/list_install_components.dir
+/root/docker_tello_ros2/tello_ws/build/tello_control/CMakeFiles/rebuild_cache.dir
+/root/docker_tello_ros2/tello_ws/build/tello_control/CMakeFiles/edit_cache.dir
+/root/docker_tello_ros2/tello_ws/build/tello_control/CMakeFiles/test.dir
+/root/docker_tello_ros2/tello_ws/build/tello_control/CMakeFiles/tello_control.dir
+/root/docker_tello_ros2/tello_ws/build/tello_control/CMakeFiles/tello_control_uninstall.dir
+/root/docker_tello_ros2/tello_ws/build/tello_control/CMakeFiles/uninstall.dir

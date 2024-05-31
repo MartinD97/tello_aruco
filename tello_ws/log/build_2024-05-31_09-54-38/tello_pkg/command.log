@@ -1,0 +1,2 @@
+Invoking command in '/root/docker_tello_ros2/tello_ws/build/tello_pkg': /usr/bin/cmake /root/docker_tello_ros2/tello_ws/src/tello_pkg -DCMAKE_INSTALL_PREFIX=/root/docker_tello_ros2/tello_ws/install/tello_pkg
+Invoked command in '/root/docker_tello_ros2/tello_ws/build/tello_pkg' returned '1': /usr/bin/cmake /root/docker_tello_ros2/tello_ws/src/tello_pkg -DCMAKE_INSTALL_PREFIX=/root/docker_tello_ros2/tello_ws/install/tello_pkg
