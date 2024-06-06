@@ -3,7 +3,7 @@ FROM osrf/ros:foxy-desktop
 RUN apt-get -y update && apt-get install -y git
 RUN apt-get -y upgrade
 WORKDIR /root/docker_tello_ros2
-#RUN git clone https://github.com/tentone/tello-ros2.git
+RUN git clone https://github.com/tentone/tello-ros2.git
 
 ## install.sh
 RUN apt-get -y update && apt-get -y upgrade

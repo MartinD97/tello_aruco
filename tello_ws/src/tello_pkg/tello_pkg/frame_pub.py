@@ -8,7 +8,7 @@ import cv2
 class VideoPublisher(Node):
     def __init__(self):
         super().__init__('frame_pub')
-        self.publisher_ = self.create_publisher(Image, 'video_frames', 10)
+        self.publisher_ = self.create_publisher(Image, 'image_raw', 10)
         self.timer = self.create_timer(0.1, self.timer_callback)
         self.get_logger().info('frame_pub started')
 

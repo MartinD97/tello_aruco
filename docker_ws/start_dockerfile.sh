@@ -1,8 +1,11 @@
 #!/bin/bash
+xhost +
 IMAGE=tello
 
 docker run --rm -it\
  --privileged \
+ --ipc host \
+ --net host \
  -e DISPLAY=$DISPLAY \
  -v /tmp/.X11-unix/:/tmp/.X11-unix \
  -v ~/.Xauthority:/root/.Xauthority \
