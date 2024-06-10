@@ -43,3 +43,7 @@ RUN cd opencv
 #RUN git fetch
 #RUN git checkout 3.4
 RUN cmake
+
+#for target
+RUN pip3 install opencv-contrib-python transforms3d
+RUN git clone https://github.com/JMU-ROBOTICS-VIVA/ros2_aruco.git

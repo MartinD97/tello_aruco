@@ -11,6 +11,6 @@ docker run --rm -it\
  -v ~/.Xauthority:/root/.Xauthority \
  -e XAUTHORITY=/root/.Xauthority \
  -v /dev/video0:/dev/video0 \
- -v ~/docker_tello_ros2:/root/docker_tello_ros2/\
+ -v ~/docker_tello_ros2:/root/docker_tello_ros2/wrk_src\
  --name tello \
  $IMAGE bash
