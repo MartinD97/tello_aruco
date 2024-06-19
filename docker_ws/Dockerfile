@@ -47,3 +47,13 @@ RUN cmake
 #for target
 RUN pip3 install opencv-contrib-python transforms3d
 RUN git clone https://github.com/JMU-ROBOTICS-VIVA/ros2_aruco.git
+RUN apt install -y ros-foxy-tf-transformations
+RUN apt install nano
+
+#phone camera
+RUN apt update
+RUN apt install -y ros-foxy-image-transport ros-foxy-cv-bridge ros-foxy-sensor-msgs ros-foxy-rqt-image-view
+RUN pip install requests
+RUN sudo apt install -y adb
+RUN sudo apt install -y scrcpy
+RUN sudo apt-get install -y cheese

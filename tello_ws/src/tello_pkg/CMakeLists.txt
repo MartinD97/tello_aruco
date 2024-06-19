@@ -13,6 +13,9 @@ install(
   PROGRAMS
   scripts/video_publisher.py
   scripts/detect_marker.py
+  scripts/camera.py
+  scripts/camera_usb.py
+  scripts/aruco_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

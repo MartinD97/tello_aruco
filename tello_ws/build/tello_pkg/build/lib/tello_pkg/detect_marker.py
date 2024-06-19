@@ -13,7 +13,7 @@ class ArucoDetector(Node):
         super().__init__('aruco_detector')
         self.subscription = self.create_subscription(
             Image,
-            'video_frames',  # Assicurati che questo topic corrisponda a quello pubblicato dal nodo video_publisher
+            'image_raw',  # Assicurati che questo topic corrisponda a quello pubblicato dal nodo video_publisher
             self.listener_callback,
             10)
         self.subscription  # Prevent unused variable warning
@@ -60,6 +60,8 @@ class ArucoDetector(Node):
                 cv2.putText(frame, str(marker_id), (top_left[0], top_left[1] - 15),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
+        cv2.namedWindow('Aruco Detector', cv2.WINDOW_NORMAL)
+        cv2.resizeWindow('Aruco Detector', 1270, 720)
         cv2.imshow('Aruco Detector', frame)
         cv2.waitKey(1)
 

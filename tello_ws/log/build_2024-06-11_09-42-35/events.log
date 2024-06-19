@@ -1,0 +1,39 @@
+[0.000000] (-) TimerEvent: {}
+[0.001437] (tello_pkg) JobQueued: {'identifier': 'tello_pkg', 'dependencies': OrderedDict()}
+[0.001513] (tello_pkg) JobStarted: {'identifier': 'tello_pkg'}
+[0.099895] (-) TimerEvent: {}
+[0.202245] (-) TimerEvent: {}
+[0.302713] (-) TimerEvent: {}
+[0.403346] (-) TimerEvent: {}
+[0.503745] (-) TimerEvent: {}
+[0.561437] (tello_pkg) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/tello_pkg', 'build', '--build-base', '/root/docker_tello_ros2/wrk_src/build/tello_pkg/build', 'install', '--record', '/root/docker_tello_ros2/wrk_src/build/tello_pkg/install.log', '--install-scripts', '$base/lib/tello_pkg', '--single-version-externally-managed', 'install_data'], 'cwd': '/root/docker_tello_ros2/wrk_src/src/tello_pkg', 'env': {'HOSTNAME': 'docker-desktop', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/root/docker_tello_ros2/wrk_src/install/tello_msg/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:/opt/ros/foxy/lib', 'HOME': '/root', 'OLDPWD': '/root/docker_tello_ros2/wrk_src/src/tello_pkg/tello_pkg', 'ROS_PYTHON_VERSION': '3', '_colcon_cd_root': '/root/ros2_install', 'COLCON_PREFIX_PATH': '/root/docker_tello_ros2/wrk_src/install', 'ROS_DISTRO': 'foxy', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XAUTHORITY': '/root/.Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/root/docker_tello_ros2/wrk_src/install/tello_pkg:/root/docker_tello_ros2/wrk_src/install/tello_msg:/root/docker_tello_ros2/wrk_src/install/tello_control:/opt/ros/foxy', 'PWD': '/root/docker_tello_ros2/wrk_src/build/tello_pkg', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/root/docker_tello_ros2/wrk_src/build/tello_pkg/prefix_override:/root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/python3.8/site-packages:/root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/python3.8/site-packages:/root/docker_tello_ros2/wrk_src/install/tello_msg/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/root/docker_tello_ros2/wrk_src/install/tello_msg:/root/docker_tello_ros2/wrk_src/install/tello_control'}, 'shell': False}
+[0.603933] (-) TimerEvent: {}
+[0.704597] (-) TimerEvent: {}
+[0.732424] (tello_pkg) StdoutLine: {'line': b'running egg_info\n'}
+[0.732920] (tello_pkg) StdoutLine: {'line': b'writing ../../build/tello_pkg/tello_pkg.egg-info/PKG-INFO\n'}
+[0.733227] (tello_pkg) StdoutLine: {'line': b'writing dependency_links to ../../build/tello_pkg/tello_pkg.egg-info/dependency_links.txt\n'}
+[0.733496] (tello_pkg) StdoutLine: {'line': b'writing entry points to ../../build/tello_pkg/tello_pkg.egg-info/entry_points.txt\n'}
+[0.733795] (tello_pkg) StdoutLine: {'line': b'writing requirements to ../../build/tello_pkg/tello_pkg.egg-info/requires.txt\n'}
+[0.734055] (tello_pkg) StdoutLine: {'line': b'writing top-level names to ../../build/tello_pkg/tello_pkg.egg-info/top_level.txt\n'}
+[0.769034] (tello_pkg) StdoutLine: {'line': b"reading manifest file '../../build/tello_pkg/tello_pkg.egg-info/SOURCES.txt'\n"}
+[0.769925] (tello_pkg) StdoutLine: {'line': b"writing manifest file '../../build/tello_pkg/tello_pkg.egg-info/SOURCES.txt'\n"}
+[0.770103] (tello_pkg) StdoutLine: {'line': b'running build\n'}
+[0.770166] (tello_pkg) StdoutLine: {'line': b'running build_py\n'}
+[0.770463] (tello_pkg) StdoutLine: {'line': b'copying tello_pkg/camera.py -> /root/docker_tello_ros2/wrk_src/build/tello_pkg/build/lib/tello_pkg\n'}
+[0.770714] (tello_pkg) StdoutLine: {'line': b'running install\n'}
+[0.771692] (tello_pkg) StdoutLine: {'line': b'running install_lib\n'}
+[0.772516] (tello_pkg) StdoutLine: {'line': b'copying /root/docker_tello_ros2/wrk_src/build/tello_pkg/build/lib/tello_pkg/camera.py -> /root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg\n'}
+[0.773053] (tello_pkg) StdoutLine: {'line': b'byte-compiling /root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg/camera.py to camera.cpython-38.pyc\n'}
+[0.774741] (tello_pkg) StdoutLine: {'line': b'running install_data\n'}
+[0.775007] (tello_pkg) StdoutLine: {'line': b'running install_egg_info\n'}
+[0.776380] (tello_pkg) StdoutLine: {'line': b"removing '/root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg-0.0.0-py3.8.egg-info' (and everything under it)\n"}
+[0.776667] (tello_pkg) StdoutLine: {'line': b'Copying ../../build/tello_pkg/tello_pkg.egg-info to /root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg-0.0.0-py3.8.egg-info\n'}
+[0.779114] (tello_pkg) StdoutLine: {'line': b'running install_scripts\n'}
+[0.800643] (tello_pkg) StdoutLine: {'line': b'Installing camera script to /root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/tello_pkg\n'}
+[0.801021] (tello_pkg) StdoutLine: {'line': b'Installing detect_marker script to /root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/tello_pkg\n'}
+[0.801208] (tello_pkg) StdoutLine: {'line': b'Installing frame_pub script to /root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/tello_pkg\n'}
+[0.804796] (-) TimerEvent: {}
+[0.817578] (tello_pkg) StdoutLine: {'line': b"writing list of installed files to '/root/docker_tello_ros2/wrk_src/build/tello_pkg/install.log'\n"}
+[0.845396] (tello_pkg) CommandEnded: {'returncode': 0}
+[0.857305] (tello_pkg) JobEnded: {'identifier': 'tello_pkg', 'rc': 0}
+[0.858025] (-) EventReactorShutdown: {}

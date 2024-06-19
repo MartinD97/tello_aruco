@@ -1,0 +1,26 @@
+[0.926s] Invoking command in '/root/docker_tello_ros2/wrk_src/src/tello_pkg': PYTHONPATH=/root/docker_tello_ros2/wrk_src/build/tello_pkg/prefix_override:/root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/tello_pkg build --build-base /root/docker_tello_ros2/wrk_src/build/tello_pkg/build install --record /root/docker_tello_ros2/wrk_src/build/tello_pkg/install.log --install-scripts $base/lib/tello_pkg --single-version-externally-managed install_data
+[1.177s] running egg_info
+[1.177s] writing ../../build/tello_pkg/tello_pkg.egg-info/PKG-INFO
+[1.177s] writing dependency_links to ../../build/tello_pkg/tello_pkg.egg-info/dependency_links.txt
+[1.178s] writing entry points to ../../build/tello_pkg/tello_pkg.egg-info/entry_points.txt
+[1.179s] writing requirements to ../../build/tello_pkg/tello_pkg.egg-info/requires.txt
+[1.179s] writing top-level names to ../../build/tello_pkg/tello_pkg.egg-info/top_level.txt
+[1.226s] reading manifest file '../../build/tello_pkg/tello_pkg.egg-info/SOURCES.txt'
+[1.228s] writing manifest file '../../build/tello_pkg/tello_pkg.egg-info/SOURCES.txt'
+[1.228s] running build
+[1.228s] running build_py
+[1.229s] copying tello_pkg/camera.py -> /root/docker_tello_ros2/wrk_src/build/tello_pkg/build/lib/tello_pkg
+[1.229s] running install
+[1.230s] running install_lib
+[1.232s] copying /root/docker_tello_ros2/wrk_src/build/tello_pkg/build/lib/tello_pkg/camera.py -> /root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg
+[1.233s] byte-compiling /root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg/camera.py to camera.cpython-38.pyc
+[1.235s] running install_data
+[1.236s] running install_egg_info
+[1.239s] removing '/root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg-0.0.0-py3.8.egg-info' (and everything under it)
+[1.239s] Copying ../../build/tello_pkg/tello_pkg.egg-info to /root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg-0.0.0-py3.8.egg-info
+[1.241s] running install_scripts
+[1.266s] Installing camera script to /root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/tello_pkg
+[1.266s] Installing detect_marker script to /root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/tello_pkg
+[1.267s] Installing frame_pub script to /root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/tello_pkg
+[1.267s] writing list of installed files to '/root/docker_tello_ros2/wrk_src/build/tello_pkg/install.log'
+[1.297s] Invoked command in '/root/docker_tello_ros2/wrk_src/src/tello_pkg' returned '0': PYTHONPATH=/root/docker_tello_ros2/wrk_src/build/tello_pkg/prefix_override:/root/docker_tello_ros2/wrk_src/install/tello_pkg/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/tello_pkg build --build-base /root/docker_tello_ros2/wrk_src/build/tello_pkg/build install --record /root/docker_tello_ros2/wrk_src/build/tello_pkg/install.log --install-scripts $base/lib/tello_pkg --single-version-externally-managed install_data

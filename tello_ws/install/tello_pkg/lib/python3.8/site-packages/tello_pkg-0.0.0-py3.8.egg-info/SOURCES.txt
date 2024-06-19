@@ -10,6 +10,9 @@ setup.py
 ../../build/tello_pkg/tello_pkg.egg-info/zip-safe
 resource/tello_pkg
 tello_pkg/__init__.py
+tello_pkg/aruco_node.py
+tello_pkg/camera.py
+tello_pkg/camera_usb.py
 tello_pkg/detect_marker.py
 tello_pkg/detect_marker_template.py
 tello_pkg/frame_pub.py

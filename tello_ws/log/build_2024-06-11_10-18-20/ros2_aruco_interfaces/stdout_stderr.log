@@ -1,0 +1,31 @@
+running egg_info
+creating ../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info
+writing ../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/PKG-INFO
+writing dependency_links to ../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/dependency_links.txt
+writing entry points to ../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/entry_points.txt
+writing requirements to ../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/requires.txt
+writing top-level names to ../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/top_level.txt
+writing manifest file '../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/SOURCES.txt'
+reading manifest file '../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/SOURCES.txt'
+writing manifest file '../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/build
+creating /root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/build/lib
+creating /root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/build/lib/ros2_aruco_interfaces
+copying ros2_aruco_interfaces/__init__.py -> /root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/build/lib/ros2_aruco_interfaces
+running install
+running install_lib
+creating /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/lib/python3.8/site-packages/ros2_aruco_interfaces
+copying /root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/build/lib/ros2_aruco_interfaces/__init__.py -> /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/lib/python3.8/site-packages/ros2_aruco_interfaces
+byte-compiling /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/lib/python3.8/site-packages/ros2_aruco_interfaces/__init__.py to __init__.cpython-38.pyc
+running install_data
+creating /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/share/ament_index
+creating /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/share/ament_index/resource_index
+creating /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/share/ament_index/resource_index/packages
+copying resource/ros2_aruco_interfaces -> /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/share/ament_index/resource_index/packages
+copying package.xml -> /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces
+running install_egg_info
+Copying ../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info to /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/lib/python3.8/site-packages/ros2_aruco_interfaces-0.0.0-py3.8.egg-info
+running install_scripts
+writing list of installed files to '/root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/install.log'

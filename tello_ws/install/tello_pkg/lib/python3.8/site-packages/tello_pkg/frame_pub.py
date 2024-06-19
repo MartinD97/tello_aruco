@@ -8,19 +8,12 @@ import cv2
 class VideoPublisher(Node):
     def __init__(self):
         super().__init__('frame_pub')
-        self.publisher_ = self.create_publisher(Image, 'video_frames', 10)
+        self.publisher_ = self.create_publisher(Image, 'image_raw', 10)
         self.timer = self.create_timer(0.1, self.timer_callback)
         self.get_logger().info('frame_pub started')
 
-        #video_path = os.path.join(
-        #    os.path.dirname(__file__), 
-        #    '..', 
-        #    'videos', 
-        #    'detect_phone.mp4'
-        #)
-        video_path = '/root/docker_tello_ros2/tello_ws/src/tello_pkg/videos/detect_phone.mp4'
+        video_path = '/root/docker_tello_ros2/wrk_src/src/tello_pkg/videos/detect_phone.mp4'
         self.get_logger().info(video_path)
-
         self.cap = cv2.VideoCapture(video_path)
         self.bridge = CvBridge()
 

@@ -60,6 +60,8 @@ class ArucoDetector(Node):
                 cv2.putText(frame, str(marker_id), (top_left[0], top_left[1] - 15),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
+        cv2.namedWindow('Aruco Detector', cv2.WINDOW_NORMAL)
+        cv2.resizeWindow('Aruco Detector', 1270, 720)
         cv2.imshow('Aruco Detector', frame)
         cv2.waitKey(1)
 

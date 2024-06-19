@@ -1,0 +1,33 @@
+[1.481s] Invoking command in '/root/docker_tello_ros2/wrk_src/ros2_aruco_interfaces': PYTHONPATH=/root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/prefix_override:/root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../build/ros2_aruco_interfaces build --build-base /root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/build install --record /root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/install.log --install-scripts $base/lib/ros2_aruco_interfaces --single-version-externally-managed install_data
+[1.852s] running egg_info
+[1.853s] creating ../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info
+[1.857s] writing ../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/PKG-INFO
+[1.858s] writing dependency_links to ../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/dependency_links.txt
+[1.858s] writing entry points to ../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/entry_points.txt
+[1.859s] writing requirements to ../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/requires.txt
+[1.860s] writing top-level names to ../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/top_level.txt
+[1.864s] writing manifest file '../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/SOURCES.txt'
+[1.938s] reading manifest file '../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/SOURCES.txt'
+[1.939s] writing manifest file '../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info/SOURCES.txt'
+[1.940s] running build
+[1.940s] running build_py
+[1.940s] creating /root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/build
+[1.940s] creating /root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/build/lib
+[1.940s] creating /root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/build/lib/ros2_aruco_interfaces
+[1.941s] copying ros2_aruco_interfaces/__init__.py -> /root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/build/lib/ros2_aruco_interfaces
+[1.941s] running install
+[1.942s] running install_lib
+[1.943s] creating /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/lib/python3.8/site-packages/ros2_aruco_interfaces
+[1.944s] copying /root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/build/lib/ros2_aruco_interfaces/__init__.py -> /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/lib/python3.8/site-packages/ros2_aruco_interfaces
+[1.944s] byte-compiling /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/lib/python3.8/site-packages/ros2_aruco_interfaces/__init__.py to __init__.cpython-38.pyc
+[1.945s] running install_data
+[1.946s] creating /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/share/ament_index
+[1.946s] creating /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/share/ament_index/resource_index
+[1.947s] creating /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/share/ament_index/resource_index/packages
+[1.947s] copying resource/ros2_aruco_interfaces -> /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/share/ament_index/resource_index/packages
+[1.947s] copying package.xml -> /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/share/ros2_aruco_interfaces
+[1.948s] running install_egg_info
+[1.949s] Copying ../build/ros2_aruco_interfaces/ros2_aruco_interfaces.egg-info to /root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/lib/python3.8/site-packages/ros2_aruco_interfaces-0.0.0-py3.8.egg-info
+[1.951s] running install_scripts
+[1.981s] writing list of installed files to '/root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/install.log'
+[2.013s] Invoked command in '/root/docker_tello_ros2/wrk_src/ros2_aruco_interfaces' returned '0': PYTHONPATH=/root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/prefix_override:/root/docker_tello_ros2/wrk_src/install/ros2_aruco_interfaces/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../build/ros2_aruco_interfaces build --build-base /root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/build install --record /root/docker_tello_ros2/wrk_src/build/ros2_aruco_interfaces/install.log --install-scripts $base/lib/ros2_aruco_interfaces --single-version-externally-managed install_data
