@@ -1,1 +1,0 @@
-Invoking command in '/root/dtello_MD/wrk_src/build/tello_msg': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /root/dtello_MD/wrk_src/tello-ros2/workspace/src/tello_msg -DCMAKE_INSTALL_PREFIX=/root/dtello_MD/wrk_src/install/tello_msg

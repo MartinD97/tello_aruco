@@ -1,5 +1,0 @@
-[0.214s] Invoking command in '/root/dtello_MD/wrk_src/build/tello_control': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /root/dtello_MD/wrk_src/build/tello_control -- -j8 -l8
-[0.532s] [35m[1mScanning dependencies of target tello_control[0m
-[0.533s] [ 50%] [32mBuilding CXX object CMakeFiles/tello_control.dir/src/main.cpp.o[0m
-[7.155s] [100%] [32m[1mLinking CXX executable tello_control[0m
-[7.641s] [100%] Built target tello_control
