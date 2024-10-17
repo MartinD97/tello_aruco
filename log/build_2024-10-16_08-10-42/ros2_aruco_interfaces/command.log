@@ -1,0 +1,1 @@
+Invoking command in '/root/dtello_MD/wrk_src/build/ros2_aruco_interfaces': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /root/dtello_MD/wrk_src/ros2_aruco/ros2_aruco_interfaces -DCMAKE_INSTALL_PREFIX=/root/dtello_MD/wrk_src/install/ros2_aruco_interfaces

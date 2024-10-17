@@ -2,8 +2,7 @@ FROM osrf/ros:foxy-desktop
 
 RUN apt-get -y update && apt-get install -y git
 RUN apt-get -y upgrade
-WORKDIR /root/docker_tello_ros2
-RUN git clone https://github.com/tentone/tello-ros2.git
+WORKDIR /root/tello_MD
 
 ## install.sh
 RUN apt-get -y update && apt-get -y upgrade
@@ -46,7 +45,6 @@ RUN cmake
 
 #for target
 RUN pip3 install opencv-contrib-python transforms3d
-RUN git clone https://github.com/JMU-ROBOTICS-VIVA/ros2_aruco.git
 RUN apt install -y ros-foxy-tf-transformations
 RUN apt install nano
 

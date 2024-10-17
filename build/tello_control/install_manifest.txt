@@ -1,0 +1,16 @@
+/root/dtello_MD/wrk_src/install/tello_control/lib/tello_control/tello_control
+/root/dtello_MD/wrk_src/install/tello_control/share/ament_index/resource_index/package_run_dependencies/tello_control
+/root/dtello_MD/wrk_src/install/tello_control/share/ament_index/resource_index/parent_prefix_path/tello_control
+/root/dtello_MD/wrk_src/install/tello_control/share/tello_control/environment/ament_prefix_path.sh
+/root/dtello_MD/wrk_src/install/tello_control/share/tello_control/environment/ament_prefix_path.dsv
+/root/dtello_MD/wrk_src/install/tello_control/share/tello_control/environment/path.sh
+/root/dtello_MD/wrk_src/install/tello_control/share/tello_control/environment/path.dsv
+/root/dtello_MD/wrk_src/install/tello_control/share/tello_control/local_setup.bash
+/root/dtello_MD/wrk_src/install/tello_control/share/tello_control/local_setup.sh
+/root/dtello_MD/wrk_src/install/tello_control/share/tello_control/local_setup.zsh
+/root/dtello_MD/wrk_src/install/tello_control/share/tello_control/local_setup.dsv
+/root/dtello_MD/wrk_src/install/tello_control/share/tello_control/package.dsv
+/root/dtello_MD/wrk_src/install/tello_control/share/ament_index/resource_index/packages/tello_control
+/root/dtello_MD/wrk_src/install/tello_control/share/tello_control/cmake/tello_controlConfig.cmake
+/root/dtello_MD/wrk_src/install/tello_control/share/tello_control/cmake/tello_controlConfig-version.cmake
+/root/dtello_MD/wrk_src/install/tello_control/share/tello_control/package.xml

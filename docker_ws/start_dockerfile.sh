@@ -11,6 +11,6 @@ docker run --rm -it\
  -v ~/.Xauthority:/root/.Xauthority \
  -e XAUTHORITY=/root/.Xauthority \
  -v /dev/video0:/dev/video0 \
- -v ~/docker_tello_ros2/tello_ws:/root/docker_tello_ros2/wrk_src\
+ -v ~/Tello-detect-marker-Aruco:/root/tello_MD/wrk_src\
  --name tello \
  $IMAGE bash

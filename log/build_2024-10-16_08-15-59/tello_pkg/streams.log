@@ -1,0 +1,27 @@
+[0.992s] Invoking command in '/root/dtello_MD/wrk_src/tello_ws/src/tello_pkg': PYTHONPATH=/root/dtello_MD/wrk_src/build/tello_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/dtello_MD/wrk_src/install/tello_pkg/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../../build/tello_pkg build --build-base /root/dtello_MD/wrk_src/build/tello_pkg/build install --record /root/dtello_MD/wrk_src/build/tello_pkg/install.log --install-scripts $base/lib/tello_pkg --single-version-externally-managed install_data
+[1.164s] running egg_info
+[1.164s] writing ../../../build/tello_pkg/tello_pkg.egg-info/PKG-INFO
+[1.165s] writing dependency_links to ../../../build/tello_pkg/tello_pkg.egg-info/dependency_links.txt
+[1.165s] writing entry points to ../../../build/tello_pkg/tello_pkg.egg-info/entry_points.txt
+[1.165s] writing requirements to ../../../build/tello_pkg/tello_pkg.egg-info/requires.txt
+[1.165s] writing top-level names to ../../../build/tello_pkg/tello_pkg.egg-info/top_level.txt
+[1.194s] reading manifest file '../../../build/tello_pkg/tello_pkg.egg-info/SOURCES.txt'
+[1.194s] writing manifest file '../../../build/tello_pkg/tello_pkg.egg-info/SOURCES.txt'
+[1.195s] running build
+[1.195s] running build_py
+[1.195s] copying tello_pkg/camera.py -> /root/dtello_MD/wrk_src/build/tello_pkg/build/lib/tello_pkg
+[1.195s] running install
+[1.196s] running install_lib
+[1.198s] copying /root/dtello_MD/wrk_src/build/tello_pkg/build/lib/tello_pkg/camera.py -> /root/dtello_MD/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg
+[1.199s] byte-compiling /root/dtello_MD/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg/camera.py to camera.cpython-38.pyc
+[1.200s] running install_data
+[1.200s] running install_egg_info
+[1.202s] removing '/root/dtello_MD/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg-0.0.0-py3.8.egg-info' (and everything under it)
+[1.203s] Copying ../../../build/tello_pkg/tello_pkg.egg-info to /root/dtello_MD/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg-0.0.0-py3.8.egg-info
+[1.203s] running install_scripts
+[1.221s] Installing aruco_node script to /root/dtello_MD/wrk_src/install/tello_pkg/lib/tello_pkg
+[1.221s] Installing camera script to /root/dtello_MD/wrk_src/install/tello_pkg/lib/tello_pkg
+[1.221s] Installing camera_usb script to /root/dtello_MD/wrk_src/install/tello_pkg/lib/tello_pkg
+[1.221s] Installing detect_marker script to /root/dtello_MD/wrk_src/install/tello_pkg/lib/tello_pkg
+[1.221s] Installing frame_pub script to /root/dtello_MD/wrk_src/install/tello_pkg/lib/tello_pkg
+[1.222s] writing list of installed files to '/root/dtello_MD/wrk_src/build/tello_pkg/install.log'

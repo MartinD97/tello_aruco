@@ -1,0 +1,8 @@
+{
+  "package_name": "tello_msg",
+  "non_idl_tuples": [
+    "/root/dtello_MD/wrk_src/tello-ros2/workspace/src/tello_msg:msg/TelloStatus.msg",
+    "/root/dtello_MD/wrk_src/tello-ros2/workspace/src/tello_msg:msg/TelloID.msg",
+    "/root/dtello_MD/wrk_src/tello-ros2/workspace/src/tello_msg:msg/TelloWifiConfig.msg"
+  ]
+}

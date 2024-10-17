@@ -1,0 +1,28 @@
+[0.517s] Invoking command in '/root/tello_MD/wrk_src/tello_ws/src/tello_pkg': PYTHONPATH=/root/tello_MD/wrk_src/build/tello_pkg/prefix_override:/root/tello_MD/wrk_src/install/tello_pkg/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../../build/tello_pkg build --build-base /root/tello_MD/wrk_src/build/tello_pkg/build install --record /root/tello_MD/wrk_src/build/tello_pkg/install.log --install-scripts $base/lib/tello_pkg --single-version-externally-managed
+[0.666s] running egg_info
+[0.666s] writing ../../../build/tello_pkg/tello_pkg.egg-info/PKG-INFO
+[0.666s] writing dependency_links to ../../../build/tello_pkg/tello_pkg.egg-info/dependency_links.txt
+[0.666s] writing entry points to ../../../build/tello_pkg/tello_pkg.egg-info/entry_points.txt
+[0.667s] writing requirements to ../../../build/tello_pkg/tello_pkg.egg-info/requires.txt
+[0.667s] writing top-level names to ../../../build/tello_pkg/tello_pkg.egg-info/top_level.txt
+[0.694s] reading manifest file '../../../build/tello_pkg/tello_pkg.egg-info/SOURCES.txt'
+[0.695s] writing manifest file '../../../build/tello_pkg/tello_pkg.egg-info/SOURCES.txt'
+[0.695s] running build
+[0.695s] running build_py
+[0.695s] copying tello_pkg/aruco_node.py -> /root/tello_MD/wrk_src/build/tello_pkg/build/lib/tello_pkg
+[0.695s] running install
+[0.696s] running install_lib
+[0.697s] copying /root/tello_MD/wrk_src/build/tello_pkg/build/lib/tello_pkg/aruco_node.py -> /root/tello_MD/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg
+[0.697s] byte-compiling /root/tello_MD/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg/aruco_node.py to aruco_node.cpython-38.pyc
+[0.699s] running install_data
+[0.700s] running install_egg_info
+[0.701s] removing '/root/tello_MD/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg-0.0.0-py3.8.egg-info' (and everything under it)
+[0.701s] Copying ../../../build/tello_pkg/tello_pkg.egg-info to /root/tello_MD/wrk_src/install/tello_pkg/lib/python3.8/site-packages/tello_pkg-0.0.0-py3.8.egg-info
+[0.702s] running install_scripts
+[0.714s] Installing aruco_node script to /root/tello_MD/wrk_src/install/tello_pkg/lib/tello_pkg
+[0.714s] Installing camera script to /root/tello_MD/wrk_src/install/tello_pkg/lib/tello_pkg
+[0.714s] Installing camera_usb script to /root/tello_MD/wrk_src/install/tello_pkg/lib/tello_pkg
+[0.714s] Installing detect_marker script to /root/tello_MD/wrk_src/install/tello_pkg/lib/tello_pkg
+[0.715s] Installing frame_pub script to /root/tello_MD/wrk_src/install/tello_pkg/lib/tello_pkg
+[0.715s] writing list of installed files to '/root/tello_MD/wrk_src/build/tello_pkg/install.log'
+[0.732s] Invoked command in '/root/tello_MD/wrk_src/tello_ws/src/tello_pkg' returned '0': PYTHONPATH=/root/tello_MD/wrk_src/build/tello_pkg/prefix_override:/root/tello_MD/wrk_src/install/tello_pkg/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../../build/tello_pkg build --build-base /root/tello_MD/wrk_src/build/tello_pkg/build install --record /root/tello_MD/wrk_src/build/tello_pkg/install.log --install-scripts $base/lib/tello_pkg --single-version-externally-managed

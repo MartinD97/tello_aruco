@@ -1,0 +1,55 @@
+[0.036s] Invoking command in '/root/dtello_MD/wrk_src/build/orbslam2': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /root/dtello_MD/wrk_src/tello-ros2/slam/src/orbslam2 -DCMAKE_INSTALL_PREFIX=/root/dtello_MD/wrk_src/install/orbslam2
+[0.233s] -- The C compiler identification is GNU 9.4.0
+[0.233s] -- The CXX compiler identification is GNU 9.4.0
+[0.236s] -- Check for working C compiler: /usr/bin/cc
+[0.237s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.237s] -- Detecting C compiler ABI info
+[0.279s] -- Detecting C compiler ABI info - done
+[0.289s] -- Detecting C compile features
+[0.290s] -- Detecting C compile features - done
+[0.294s] -- Check for working CXX compiler: /usr/bin/c++
+[0.393s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[0.393s] -- Detecting CXX compiler ABI info
+[0.506s] -- Detecting CXX compiler ABI info - done
+[0.530s] -- Detecting CXX compile features
+[0.531s] -- Detecting CXX compile features - done
+[0.539s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.574s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+[0.575s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.787s] -- Found rclcpp: 2.4.3 (/opt/ros/foxy/share/rclcpp/cmake)
+[0.853s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.864s] -- Found rosidl_adapter: 1.3.1 (/opt/ros/foxy/share/rosidl_adapter/cmake)
+[0.987s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  
+[1.051s] -- Found FastRTPS: /opt/ros/foxy/include  
+[1.144s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.203s] -- Found rmw_implementation_cmake: 1.0.4 (/opt/ros/foxy/share/rmw_implementation_cmake/cmake)
+[1.205s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.206s] -- Looking for pthread.h
+[1.291s] -- Looking for pthread.h - found
+[1.291s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.389s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+[1.389s] -- Looking for pthread_create in pthreads
+[1.451s] -- Looking for pthread_create in pthreads - not found
+[1.451s] -- Looking for pthread_create in pthread
+[1.518s] -- Looking for pthread_create in pthread - found
+[1.519s] -- Found Threads: TRUE  
+[1.670s] -- Found sensor_msgs: 2.0.5 (/opt/ros/foxy/share/sensor_msgs/cmake)
+[1.782s] -- Found visualization_msgs: 2.0.5 (/opt/ros/foxy/share/visualization_msgs/cmake)
+[1.854s] -- Found cv_bridge: 3.0.7 (/opt/ros/foxy/share/cv_bridge/cmake)
+[1.890s] -- Found message_filters: 3.2.7 (/opt/ros/foxy/share/message_filters/cmake)
+[1.905s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake (found version "1.71.0") found components: system 
+[1.926s] CMake Error at CMakeLists.txt:24 (find_package):
+[1.926s]   Could not find a configuration file for package "OpenCV" that is compatible
+[1.926s]   with requested version "3".
+[1.926s] 
+[1.926s]   The following configuration files were considered but not accepted:
+[1.927s] 
+[1.927s]     /usr/lib/x86_64-linux-gnu/cmake/opencv4/OpenCVConfig.cmake, version: 4.2.0
+[1.927s]     /lib/x86_64-linux-gnu/cmake/opencv4/OpenCVConfig.cmake, version: 4.2.0
+[1.927s] 
+[1.927s] 
+[1.927s] 
+[1.928s] -- Configuring incomplete, errors occurred!
+[1.928s] See also "/root/dtello_MD/wrk_src/build/orbslam2/CMakeFiles/CMakeOutput.log".
+[1.929s] See also "/root/dtello_MD/wrk_src/build/orbslam2/CMakeFiles/CMakeError.log".
+[1.937s] Invoked command in '/root/dtello_MD/wrk_src/build/orbslam2' returned '1': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /root/dtello_MD/wrk_src/tello-ros2/slam/src/orbslam2 -DCMAKE_INSTALL_PREFIX=/root/dtello_MD/wrk_src/install/orbslam2

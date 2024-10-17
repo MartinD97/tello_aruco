@@ -1,0 +1,9 @@
+[0.000000] (-) TimerEvent: {}
+[0.000275] (-) JobUnselected: {'identifier': 'orbslam2'}
+[0.000315] (-) JobUnselected: {'identifier': 'ros2_aruco'}
+[0.000334] (-) JobUnselected: {'identifier': 'ros2_aruco_interfaces'}
+[0.000350] (-) JobUnselected: {'identifier': 'tello'}
+[0.000365] (-) JobUnselected: {'identifier': 'tello_control'}
+[0.000380] (-) JobUnselected: {'identifier': 'tello_msg'}
+[0.000394] (-) JobUnselected: {'identifier': 'tello_pkg'}
+[0.001214] (-) EventReactorShutdown: {}
