@@ -55,3 +55,6 @@ RUN pip install requests
 RUN sudo apt install -y adb
 RUN sudo apt install -y scrcpy
 RUN sudo apt-get install -y cheese
+
+#camera tello calibration
+RUN apt install -y ros-foxy-camera-calibration ros-foxy-camera-calibration-parsers ros-foxy-camera-info-manager ros-foxy-launch-testing-ament-cmake

@@ -171,7 +171,6 @@ class ArucoNode(rclpy.node.Node):
             self.get_logger().error(f"Failed to load camera calibration file: {e}")
             return
 
-
         self.aruco_dictionary = cv2.aruco.getPredefinedDictionary(dictionary_id)
         self.aruco_parameters = cv2.aruco.DetectorParameters()
         self.detector = cv2.aruco.ArucoDetector(self.aruco_dictionary, self.aruco_parameters)
