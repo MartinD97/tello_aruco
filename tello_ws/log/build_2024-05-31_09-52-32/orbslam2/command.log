@@ -1,2 +1,0 @@
-Invoking command in '/root/docker_tello_ros2/tello_ws/build/orbslam2': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /root/docker_tello_ros2/tello_ws/tentone/tello-ros2/slam/src/orbslam2 -DCMAKE_INSTALL_PREFIX=/root/docker_tello_ros2/tello_ws/install/orbslam2
-Invoked command in '/root/docker_tello_ros2/tello_ws/build/orbslam2' returned '1': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /root/docker_tello_ros2/tello_ws/tentone/tello-ros2/slam/src/orbslam2 -DCMAKE_INSTALL_PREFIX=/root/docker_tello_ros2/tello_ws/install/orbslam2

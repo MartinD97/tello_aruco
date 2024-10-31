@@ -1,4 +1,0 @@
-Invoking command in '/root/docker_tello_ros2/tello_ws/build/tello_control': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /root/docker_tello_ros2/tello_ws/build/tello_control -- -j8 -l8
-Invoked command in '/root/docker_tello_ros2/tello_ws/build/tello_control' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /root/docker_tello_ros2/tello_ws/build/tello_control -- -j8 -l8
-Invoking command in '/root/docker_tello_ros2/tello_ws/build/tello_control': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /root/docker_tello_ros2/tello_ws/build/tello_control
-Invoked command in '/root/docker_tello_ros2/tello_ws/build/tello_control' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /root/docker_tello_ros2/tello_ws/build/tello_control

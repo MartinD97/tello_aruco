@@ -2,21 +2,25 @@ import rclpy
 import cv2
 import numpy as np
 import pickle
+import tf2_ros
 from rclpy.node import Node
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image, CameraInfo
-from geometry_msgs.msg import PoseStamped
+from geometry_msgs.msg import PoseStamped, TransformStamped
 
 
 class CameraNode(Node):
     def __init__(self):
         super().__init__('camera_node')
+        self.tf_broadcaster = tf2_ros.StaticTransformBroadcaster(self)
         self.publisher_image = self.create_publisher(Image, 'camera/image_raw', 10)
         self.pub_camera_info = self.create_publisher(CameraInfo, 'camera/camera_info', 10)
         self.publisher_pose = self.create_publisher(PoseStamped, 'camera/pose', 10)
         self.timer = self.create_timer(0.1, self.timer_callback)
         self.bridge = CvBridge()
+        self.create_map_frame()
+        self.create_camera_frame()
 
         self.cap = cv2.VideoCapture(0)
         if not self.cap.isOpened():
@@ -24,6 +28,17 @@ class CameraNode(Node):
 
         self.calibration_file = "/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration.pckl"
         self.camera_info = self.load_calibration_file()
+
+    def create_map_frame(self):
+        t = TransformStamped()
+        t.header.stamp = self.get_clock().now().to_msg()
+        t.header.frame_id = 'world'
+        t.child_frame_id = 'map'
+        t.transform.translation.x = 0.0
+        t.transform.translation.y = 0.0
+        t.transform.translation.z = 0.0
+        t.transform.rotation.w = 1.0
+        self.tf_broadcaster.sendTransform(t)
 
     def load_calibration_file(self):
         try:
@@ -42,6 +57,21 @@ class CameraNode(Node):
         except Exception as e:
             self.get_logger().error(f"Errore durante il caricamento del file di calibrazione: {e}")
             return None
+
+    def create_camera_frame(self):
+        t = TransformStamped()
+        t.header.stamp = self.get_clock().now().to_msg()
+        t.header.frame_id = 'map'
+        t.child_frame_id = 'camera_frame'
+        t.transform.translation.x = 3.0
+        t.transform.translation.y = 0.0
+        t.transform.translation.z = 1.0
+        
+        t.transform.rotation.x = 0.0
+        t.transform.rotation.y = 0.0
+        t.transform.rotation.z = 0.7071  # sin(90°/2)
+        t.transform.rotation.w = 0.7071  # cos(90°/2)
+        self.tf_broadcaster.sendTransform(t)
 
     def timer_callback(self):
         if len(self.camera_info)  > 0:

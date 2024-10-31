@@ -69,7 +69,7 @@ class ArucoNode(rclpy.node.Node):
 
         self.declare_parameter(
             name="image_topic",
-            value="/camera/image_raw",
+            value="camera/image_raw",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
                 description="Image topic to subscribe to.",
@@ -78,7 +78,7 @@ class ArucoNode(rclpy.node.Node):
 
         self.declare_parameter(
             name="camera_info_topic",
-            value="/camera/camera_info",
+            value="camera/camera_info",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
                 description="Camera info topic to subscribe to.",
@@ -87,7 +87,7 @@ class ArucoNode(rclpy.node.Node):
 
         self.declare_parameter(
             name="camera_frame",
-            value="/camera/pose",
+            value="camera/pose",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
                 description="Camera optical frame to use.",
@@ -153,8 +153,8 @@ class ArucoNode(rclpy.node.Node):
         )
 
         # Set up publishers
-        self.poses_pub = self.create_publisher(PoseArray, "aruco_poses", 10)
-        self.markers_pub = self.create_publisher(ArucoMarkers, "aruco_markers", 10)
+        self.poses_pub = self.create_publisher(PoseArray, "camera/aruco_poses", 10)
+        self.markers_pub = self.create_publisher(ArucoMarkers, "camera/aruco_markers", 10)
 
         # Set up fields for camera parameters
         self.info_msg = None
@@ -186,7 +186,7 @@ class ArucoNode(rclpy.node.Node):
     def publish_marker_tf(self, marker_id, pose):
         t = TransformStamped()
         t.header.stamp = self.get_clock().now().to_msg()
-        t.header.frame_id = self.camera_frame if self.camera_frame != "" else self.info_msg.header.frame_id
+        t.header.frame_id = 'camera_frame'
         t.child_frame_id = f'aruco_marker_{marker_id}'
         t.transform.translation.x = pose.position.x
         t.transform.translation.y = pose.position.y

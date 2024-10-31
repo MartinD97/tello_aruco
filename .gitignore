@@ -2,3 +2,6 @@ build/
 install/
 log/
 ros2_aruco/
+tello-ros2/build
+tello-ros2/install
+tello-ros2/log

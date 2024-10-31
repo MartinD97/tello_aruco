@@ -1,2 +1,0 @@
-Invoking command in '/root/docker_tello_ros2/tello_ws/build/my_video_package': /usr/bin/cmake /root/docker_tello_ros2/tello_ws/src/tello_pkg -DCMAKE_INSTALL_PREFIX=/root/docker_tello_ros2/tello_ws/install/my_video_package
-Invoked command in '/root/docker_tello_ros2/tello_ws/build/my_video_package' returned '1': /usr/bin/cmake /root/docker_tello_ros2/tello_ws/src/tello_pkg -DCMAKE_INSTALL_PREFIX=/root/docker_tello_ros2/tello_ws/install/my_video_package

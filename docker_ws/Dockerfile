@@ -30,19 +30,6 @@ RUN apt install -y python3-tf*
 RUN apt install -y ros-foxy-ament-cmake* ros-foxy-tf2* ros-foxy-rclcpp* ros-foxy-rosgraph*
 RUN apt install -y ros-foxy-rviz* ros-foxy-rqt*
 
-#opencv.sh
-RUN mkdir -p libs
-RUN cd libs
-RUN apt install -y cmake gcc g++ python3-dev python3-numpy libavcodec-dev libavformat-dev libswscale-dev libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev libgtk-3-dev libpng-dev libjpeg-dev libopenexr-dev libtiff-dev libwebp-dev
-RUN cd ~
-RUN apt install -y git
-RUN apt-get -y update && apt-get -y upgrade
-RUN git clone https://github.com/opencv/opencv.git
-RUN cd opencv
-#RUN git fetch
-#RUN git checkout 3.4
-RUN cmake
-
 #for target
 RUN pip3 install opencv-contrib-python transforms3d
 RUN apt install -y ros-foxy-tf-transformations
@@ -58,3 +45,37 @@ RUN sudo apt-get install -y cheese
 
 #camera tello calibration
 RUN apt install -y ros-foxy-camera-calibration ros-foxy-camera-calibration-parsers ros-foxy-camera-info-manager ros-foxy-launch-testing-ament-cmake
+
+#opencv.sh
+WORKDIR /root
+RUN mkdir -p ~/libs && cd ~/libs
+RUN apt install -y cmake gcc g++ python3-dev python3-numpy libavcodec-dev libavformat-dev libswscale-dev libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev libgtk-3-dev libpng-dev libjpeg-dev libopenexr-dev libtiff-dev libwebp-dev
+RUN cd ~
+RUN apt install -y git
+RUN apt-get -y update && apt-get -y upgrade
+RUN git clone https://github.com/opencv/opencv.git
+RUN cd ~/opencv
+#RUN git fetch
+#RUN git checkout 3.4
+RUN mkdir build && cd build && cmake
+#RUN make install #-j8
+
+
+#ORB_SLAM2
+RUN apt install -y ros-foxy-vision-opencv ros-foxy-message-filters libeigen3-dev
+RUN mkdir -p ~/libs && cd ~/libs
+RUN apt install -y libgl1-mesa-dev libglew-dev libegl1-mesa-dev libwayland-dev libxkbcommon-dev wayland-protocols ffmpeg libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavdevice-dev libjpeg-dev libpng-dev libtiff5-dev libopenexr-dev
+RUN git clone https://github.com/stevenlovegrove/Pangolin.git
+RUN cd Pangolin && mkdir build && cd build && cmake
+#RUN make install #-j8
+RUN apt install -y libeigen3-dev libsuitesparse-dev qtdeclarative5-dev qt5-qmake libqglviewer-dev-qt5
+RUN git clone https://github.com/RainerKuemmerle/g2o.git
+RUN cd g2o && mkdir build && cd build && cmake
+#RUN make install #-j8
+RUN cd ../..
+#RUN git clone https://github.com/alsora/ORB_SLAM2
+RUN git clone https://github.com/zang09/ORB_SLAM3_ROS2
+RUN cd ORB_SLAM3_ROS2 && chmod +x build.sh && ./build.sh
+RUN echo "export ORB_SLAM3_ROS2_ROOT_DIR=$(pwd)" >> ~/.bashrc
+
+WORKDIR /root/tello_MD/wrk_src
