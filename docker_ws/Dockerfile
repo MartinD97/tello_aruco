@@ -47,29 +47,25 @@ RUN sudo apt-get install -y cheese
 RUN apt install -y ros-foxy-camera-calibration ros-foxy-camera-calibration-parsers ros-foxy-camera-info-manager ros-foxy-launch-testing-ament-cmake
 
 #opencv.sh
-WORKDIR /root/libs
+WORKDIR /root/tello_MD/libs
 RUN apt install -y cmake gcc g++ python3-dev python3-numpy libavcodec-dev libavformat-dev libswscale-dev libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev libgtk-3-dev libpng-dev libjpeg-dev libopenexr-dev libtiff-dev libwebp-dev
 RUN git clone https://github.com/opencv/opencv.git
 RUN cd opencv && git checkout 3.4
 RUN cd opencv && mkdir build && cd build && cmake .. -DWITH_QT=OFF -DWITH_OPENGL=ON -DBUILD_TIFF=ON -DBUILD_opencv_java=OFF -DWITH_CUDA=OFF -DWITH_GTK=ON -DWITH_V4L=ON -DWITH_FFMPEG=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr/local
 RUN cd opencv/build && make && make install
 
-#ORB_SLAM2
-# WORKDIR /root/tello_MD
-# RUN mkdir -p libs
+#ORB_SLAM
+RUN apt install -y ros-foxy-vision-opencv ros-foxy-message-filters libeigen3-dev
+RUN mkdir -p ../libs && cd ../libs
 
-# WORKDIR /root/tello_MD/libs
-# RUN apt install -y libgl1-mesa-dev libglew-dev cmake libegl1-mesa-dev libwayland-dev libxkbcommon-dev wayland-protocols ffmpeg libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavdevice-dev libjpeg-dev libpng-dev libtiff5-dev libopenexr-dev
-# RUN git clone --recursive https://github.com/stevenlovegrove/Pangolin.git
-# RUN cd Pangolin && mkdir -p build && cd build && cmake .. && make install -j8
+RUN apt install -y libgl1-mesa-dev libglew-dev cmake libegl1-mesa-dev libwayland-dev libxkbcommon-dev wayland-protocols ffmpeg libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavdevice-dev libjpeg-dev libpng-dev libtiff5-dev libopenexr-dev
+RUN git clone https://github.com/stevenlovegrove/Pangolin.git
+RUN cd Pangolin && mkdir build && cd build && cmake ..
+RUN cd Pangolin/build && make && make install
 
-# RUN apt install -y cmake libeigen3-dev libsuitesparse-dev qtdeclarative5-dev qt5-qmake libqglviewer-dev-qt5
-# RUN git clone https://github.com/RainerKuemmerle/g2o.git
-# RUN cd g2o && mkdir -p build && cd build && cmake .. && make install -j8
-
-# RUN apt install -y ros-foxy-vision-opencv ros-foxy-message-filters libeigen3-dev
-# RUN git clone https://github.com/alsora/ORB_SLAM2
-# RUN cd ORB_SLAM2 && chmod +x build.sh && ./build.sh
-# RUN echo "export ORB_SLAM2_ROOT_DIR=$(pwd)" >> ~/.bashrc
+RUN apt install -y cmake libeigen3-dev libsuitesparse-dev qtdeclarative5-dev qt5-qmake libqglviewer-dev-qt5
+RUN git clone https://github.com/RainerKuemmerle/g2o.git
+RUN cd g2o && mkdir build && cd build && cmake ..
+RUN cd g2o/build && make && make install
 
 WORKDIR /root/tello_MD/wrk_src

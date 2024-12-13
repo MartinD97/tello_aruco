@@ -69,7 +69,7 @@ class ArucoNode(rclpy.node.Node):
 
         self.declare_parameter(
             name="image_topic",
-            value="camera/image_raw",
+            value="pc/image_raw",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
                 description="Image topic to subscribe to.",
@@ -78,7 +78,7 @@ class ArucoNode(rclpy.node.Node):
 
         self.declare_parameter(
             name="camera_info_topic",
-            value="camera/camera_info",
+            value="pc/camera_info",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
                 description="Camera info topic to subscribe to.",
@@ -86,8 +86,8 @@ class ArucoNode(rclpy.node.Node):
         )
 
         self.declare_parameter(
-            name="camera_frame",
-            value="camera/pose",
+            name="pc_frame",
+            value="pc/pose",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
                 description="Camera optical frame to use.",
@@ -99,7 +99,7 @@ class ArucoNode(rclpy.node.Node):
             value="/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration.pckl",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
-                description="Path to camera calibration file (pickle format).",
+                description="Path to pc camera calibration file (pickle format).",
             ),
         )
 
@@ -124,7 +124,7 @@ class ArucoNode(rclpy.node.Node):
         self.get_logger().info(f"Image info topic: {info_topic}")
 
         self.camera_frame = (
-            self.get_parameter("camera_frame").get_parameter_value().string_value
+            self.get_parameter("pc_frame").get_parameter_value().string_value
         )
 
         self.calibration_file = (
@@ -153,8 +153,8 @@ class ArucoNode(rclpy.node.Node):
         )
 
         # Set up publishers
-        self.poses_pub = self.create_publisher(PoseArray, "camera/aruco_poses", 10)
-        self.markers_pub = self.create_publisher(ArucoMarkers, "camera/aruco_markers", 10)
+        self.poses_pub = self.create_publisher(PoseArray, "pc/aruco_poses", 10)
+        self.markers_pub = self.create_publisher(ArucoMarkers, "pc/aruco_markers", 10)
 
         # Set up fields for camera parameters
         self.info_msg = None
@@ -168,7 +168,7 @@ class ArucoNode(rclpy.node.Node):
                 self.distortion = distCoeffs
                 self.get_logger().info("Loaded calibration from {}".format(self.calibration_file))
         except Exception as e:
-            self.get_logger().error(f"Failed to load camera calibration file: {e}")
+            self.get_logger().error(f"Failed to load pc camera calibration file: {e}")
             return
 
         self.aruco_dictionary = cv2.aruco.getPredefinedDictionary(dictionary_id)
@@ -186,7 +186,7 @@ class ArucoNode(rclpy.node.Node):
     def publish_marker_tf(self, marker_id, pose):
         t = TransformStamped()
         t.header.stamp = self.get_clock().now().to_msg()
-        t.header.frame_id = 'camera_frame'
+        t.header.frame_id = 'pc_frame'
         t.child_frame_id = f'aruco_marker_{marker_id}'
         t.transform.translation.x = pose.position.x
         t.transform.translation.y = pose.position.y
@@ -200,7 +200,7 @@ class ArucoNode(rclpy.node.Node):
 
     def image_callback(self, img_msg):
         if self.intrinsic_mat is None or self.distortion is None:
-            self.get_logger().warn("No camera calibration data loaded.")
+            self.get_logger().warn("No pc camera calibration data loaded.")
             return
         frame = self.bridge.imgmsg_to_cv2(img_msg, "bgr8")
         marker_corners, marker_ids, _ = self.detector.detectMarkers(frame)

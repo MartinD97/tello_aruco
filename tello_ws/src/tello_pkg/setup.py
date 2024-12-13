@@ -20,13 +20,14 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'frame_pub = tello_pkg.frame_pub:main',
+            'video_frame_pub = tello_pkg.video_frame_pub:main',
             'detect_marker = tello_pkg.detect_marker:main',
             'camera = tello_pkg.camera:main',
             'camera_usb = tello_pkg.camera_usb:main',
             'aruco_node = tello_pkg.aruco_node:main',
             'aruco_node_tello = tello_pkg.aruco_node_tello:main',
-            'keep_alive = tello_pkg.keep_alive:main'
+            'keep_alive = tello_pkg.keep_alive:main',
+            'camera_test = tello_pkg.camera_test:main'
         ],
     },
 )

@@ -13,4 +13,7 @@ docker run --rm -it\
  -v /dev/video0:/dev/video0 \
  -v ~/Tello-detect-marker-Aruco:/root/tello_MD/wrk_src\
  --name tello \
- $IMAGE bash
+ $IMAGE bash -c "cp /root/tello_MD/wrk_src/colcon.sh /root/tello_MD && \
+ cp /root/tello_MD/wrk_src/orbslam_mono.sh /root/tello_MD && \
+ bash"
+ #source /root/tello_MD/wrk_src/install/setup.bash \
