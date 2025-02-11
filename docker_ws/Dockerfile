@@ -68,4 +68,6 @@ RUN git clone https://github.com/RainerKuemmerle/g2o.git
 RUN cd g2o && mkdir build && cd build && cmake ..
 RUN cd g2o/build && make && make install
 
+RUN pip install scipy
+
 WORKDIR /root/tello_MD/wrk_src

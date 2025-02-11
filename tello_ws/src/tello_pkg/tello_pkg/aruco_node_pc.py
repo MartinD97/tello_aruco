@@ -35,7 +35,6 @@ import numpy as np
 import cv2
 import pickle
 import tf_transformations
-import yaml
 from sensor_msgs.msg import CameraInfo
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import PoseArray, Pose
@@ -70,7 +69,7 @@ class ArucoNode(rclpy.node.Node):
 
         self.declare_parameter(
             name="image_topic",
-            value="camera",
+            value="pc/image_raw",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
                 description="Image topic to subscribe to.",
@@ -79,7 +78,7 @@ class ArucoNode(rclpy.node.Node):
 
         self.declare_parameter(
             name="camera_info_topic",
-            value="tello/camera_info",
+            value="pc/camera_info",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
                 description="Camera info topic to subscribe to.",
@@ -87,8 +86,8 @@ class ArucoNode(rclpy.node.Node):
         )
 
         self.declare_parameter(
-            name="tello_frame",
-            value="tello/pose",
+            name="pc_frame",
+            value="pc/pose",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
                 description="Camera optical frame to use.",
@@ -97,10 +96,10 @@ class ArucoNode(rclpy.node.Node):
 
         self.declare_parameter(
             name="calibration_file",
-            value="/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration.yaml",
+            value="/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration.pckl",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
-                description="Path to camera calibration file (pickle format).",
+                description="Path to pc camera calibration file (pickle format).",
             ),
         )
 
@@ -125,7 +124,7 @@ class ArucoNode(rclpy.node.Node):
         self.get_logger().info(f"Image info topic: {info_topic}")
 
         self.camera_frame = (
-            self.get_parameter("tello_frame").get_parameter_value().string_value
+            self.get_parameter("pc_frame").get_parameter_value().string_value
         )
 
         self.calibration_file = (
@@ -135,7 +134,7 @@ class ArucoNode(rclpy.node.Node):
         # Make sure we have a valid dictionary id:
         try:
             dictionary_id = cv2.aruco.__getattribute__(dictionary_id_name)
-            if type(dictionary_id) != type(cv2.aruco.DICT_4X4_100):
+            if type(dictionary_id) != type(cv2.aruco.DICT_5X5_100):
                 raise AttributeError
         except AttributeError:
             self.get_logger().error(
@@ -154,8 +153,8 @@ class ArucoNode(rclpy.node.Node):
         )
 
         # Set up publishers
-        self.poses_pub = self.create_publisher(PoseArray, "tello/aruco_poses", 10)
-        self.markers_pub = self.create_publisher(ArucoMarkers, "tello/aruco_markers", 10)
+        self.poses_pub = self.create_publisher(PoseArray, "pc/aruco_poses", 10)
+        self.markers_pub = self.create_publisher(ArucoMarkers, "pc/aruco_markers", 10)
 
         # Set up fields for camera parameters
         self.info_msg = None
@@ -163,13 +162,13 @@ class ArucoNode(rclpy.node.Node):
         self.distortion = None
 
         try:
-            with open(self.calibration_file, 'r') as f:
-                calibration_data = yaml.safe_load(f)
-                self.intrinsic_mat = np.array(calibration_data['camera_matrix']['data']).reshape((3, 3))
-                self.distortion = np.array(calibration_data['distortion_coefficients']['data'])
-                self.get_logger().info(f"Loaded calibration from {self.calibration_file}")
+            with open(self.calibration_file, 'rb') as f:
+                cameraMatrix, distCoeffs, rvecs, tvecs = pickle.load(f)
+                self.intrinsic_mat = cameraMatrix
+                self.distortion = distCoeffs
+                self.get_logger().info("Loaded calibration from {}".format(self.calibration_file))
         except Exception as e:
-            self.get_logger().error(f"Failed to load camera calibration file: {e}")
+            self.get_logger().error(f"Failed to load pc camera calibration file: {e}")
             return
 
         self.aruco_dictionary = cv2.aruco.getPredefinedDictionary(dictionary_id)
@@ -181,12 +180,13 @@ class ArucoNode(rclpy.node.Node):
         self.info_msg = info_msg
         self.intrinsic_mat = np.reshape(np.array(self.info_msg.k), (3, 3))
         self.distortion = np.array(self.info_msg.d)
+        # Assume that camera parameters will remain the same...
         self.destroy_subscription(self.info_sub)
 
     def publish_marker_tf(self, marker_id, pose):
         t = TransformStamped()
         t.header.stamp = self.get_clock().now().to_msg()
-        t.header.frame_id = 'tello_frame'
+        t.header.frame_id = 'pc_frame'
         t.child_frame_id = f'aruco_marker_{marker_id}'
         t.transform.translation.x = pose.position.x
         t.transform.translation.y = pose.position.y
@@ -200,7 +200,7 @@ class ArucoNode(rclpy.node.Node):
 
     def image_callback(self, img_msg):
         if self.intrinsic_mat is None or self.distortion is None:
-            self.get_logger().warn("No camera calibration data loaded.")
+            self.get_logger().warn("No pc camera calibration data loaded.")
             return
         frame = self.bridge.imgmsg_to_cv2(img_msg, "bgr8")
         marker_corners, marker_ids, _ = self.detector.detectMarkers(frame)
@@ -215,27 +215,18 @@ class ArucoNode(rclpy.node.Node):
             rvecs, tvecs, _ = cv2.aruco.estimatePoseSingleMarkers(
                 marker_corners, self.marker_size, self.intrinsic_mat, self.distortion
             )
-
-            correction_rotation = np.array([
-                [0, 0, 1],
-                [0, 1, 0],
-                [-1, 0, 0]
-            ])
-
             for i, marker_id in enumerate(marker_ids):
                 #marker = ArucoMarker()
                 #marker.marker_id = int(marker_id[0])
                 pose = Pose()
-                pose.position.x = tvecs[i][0][2]
+                pose.position.x = tvecs[i][0][0]
                 pose.position.y = tvecs[i][0][1]
-                pose.position.z = tvecs[i][0][0]
+                pose.position.z = tvecs[i][0][2]
 
                 #rot = R.from_rotvec(rvecs[i][0])
                 #quat = rot.as_quat()
                 rot_matrix = np.eye(4)
                 rot_matrix[0:3, 0:3] = cv2.Rodrigues(np.array(rvecs[i][0]))[0]
-                corrected_rot_matrix = np.dot(correction_rotation, rot_matrix[0:3, 0:3])
-                rot_matrix[0:3, 0:3] = corrected_rot_matrix
                 quat = tf_transformations.quaternion_from_matrix(rot_matrix)
 
                 pose.orientation.x = quat[0]

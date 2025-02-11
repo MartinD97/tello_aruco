@@ -8,7 +8,7 @@ class CommandNode(Node):
         super().__init__('command_node')
         self.pub_control = self.create_publisher(Twist, 'control', 10)
         self.sub_command = self.create_subscription(Twist, 'control', self.command_callback, 10)
-        self.timer_period = 6.0
+        self.timer_period = 5.0
         self.last_command_time = time.time()
         self.timer = self.create_timer(self.timer_period, self.send_keep_alive_if_needed)
 

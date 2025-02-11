@@ -13,7 +13,7 @@ class ArucoDetector(Node):
         super().__init__('aruco_detector')
         self.subscription = self.create_subscription(
             Image,
-            'camera/image_raw',  # Assicurati che questo topic corrisponda a quello pubblicato dal nodo video_publisher
+            'camera',  # Assicurati che questo topic corrisponda a quello pubblicato dal nodo video_publisher
             self.listener_callback,
             10)
         self.subscription  # Prevent unused variable warning

@@ -4,6 +4,7 @@ import numpy as np
 import cv2
 from cv2 import aruco
 import pickle
+import yaml
 import glob
 
 
@@ -87,10 +88,22 @@ print(cameraMatrix)
 print(distCoeffs)
     
 # Save values to be used where matrix+dist is required, for instance for posture estimation
-# I save files in a pickle file, but you can use yaml or whatever works for you
-f = open('calibration.pckl', 'wb')
-pickle.dump((cameraMatrix, distCoeffs, rvecs, tvecs), f)
-f.close()
+# I save files in a pickle or yaml
+
+
+# f = open('calibration.pckl', 'wb')
+# pickle.dump((cameraMatrix, distCoeffs, rvecs, tvecs), f)
+# f.close()
+
+calibration_data = {
+    'camera_matrix': cameraMatrix.tolist(),
+    'dist_coeffs': distCoeffs.tolist(),
+    'rotation_vectors': [vec.tolist() for vec in rvecs],
+    'translation_vectors': [vec.tolist() for vec in tvecs]
+}
+
+with open('calibration_pc.yaml', 'w') as f:
+    yaml.dump(calibration_data, f, default_flow_style=False)
     
 # Print to console our success
 print('Calibration successful. Calibration file used: {}'.format('calibration.pckl'))

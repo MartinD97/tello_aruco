@@ -23,11 +23,14 @@ setup(
             'video_frame_pub = tello_pkg.video_frame_pub:main',
             'detect_marker = tello_pkg.detect_marker:main',
             'camera = tello_pkg.camera:main',
-            'camera_usb = tello_pkg.camera_usb:main',
+            'camera_wifi = tello_pkg.camera_wifi:main',
             'aruco_node = tello_pkg.aruco_node:main',
+            'aruco_node_pc = tello_pkg.aruco_node_pc:main',
             'aruco_node_tello = tello_pkg.aruco_node_tello:main',
             'keep_alive = tello_pkg.keep_alive:main',
-            'camera_test = tello_pkg.camera_test:main'
+            'camera_test = tello_pkg.camera_test:main',
+            'target_pose = tello_pkg.target_pose:main',
+            'convert_pckl_yaml = tello_pkg.convert_pckl_yaml:main'
         ],
     },
 )

@@ -4,23 +4,24 @@ import numpy as np
 import pickle
 import tf2_ros
 import math
+import yaml
 from rclpy.node import Node
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image, CameraInfo
 from geometry_msgs.msg import PoseStamped, TransformStamped
-
+from tf_transformations import quaternion_from_matrix
 
 class PcNode(Node):
     def __init__(self):
         super().__init__('pc_node')
         self.tf_broadcaster = tf2_ros.StaticTransformBroadcaster(self)
+        self.offset_camera = self.load_transform_config('/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/offset_camera.yaml')
         self.publisher_image = self.create_publisher(Image, 'pc/image_raw', 10)
         self.pub_camera_info = self.create_publisher(CameraInfo, 'pc/camera_info', 10)
         self.publisher_pose = self.create_publisher(PoseStamped, 'pc/pose', 10)
         self.timer = self.create_timer(0.1, self.timer_callback)
         self.bridge = CvBridge()
-        self.create_map_frame()
         self.create_pc_frame()
 
         self.cap = cv2.VideoCapture(0)
@@ -30,16 +31,9 @@ class PcNode(Node):
         self.calibration_file = "/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration.pckl"
         self.camera_info = self.load_calibration_file()
 
-    def create_map_frame(self):
-        t = TransformStamped()
-        t.header.stamp = self.get_clock().now().to_msg()
-        t.header.frame_id = 'world'
-        t.child_frame_id = 'map'
-        t.transform.translation.x = 0.0
-        t.transform.translation.y = 0.0
-        t.transform.translation.z = 0.0
-        t.transform.rotation.w = 1.0
-        self.tf_broadcaster.sendTransform(t)
+    def load_transform_config(self, file_path):
+        with open(file_path, 'r') as file:
+            return yaml.safe_load(file)
 
     def load_calibration_file(self):
         try:
@@ -64,14 +58,14 @@ class PcNode(Node):
         t.header.stamp = self.get_clock().now().to_msg()
         t.header.frame_id = 'map'
         t.child_frame_id = 'pc_frame'
-        t.transform.translation.x = 0.68
-        t.transform.translation.y = 0.0
-        t.transform.translation.z = 0.58
+        t.transform.translation.x = self.offset_camera['translation']['x']
+        t.transform.translation.y = self.offset_camera['translation']['y']
+        t.transform.translation.z = self.offset_camera['translation']['z']
         
-        t.transform.rotation.x = 0.0
-        t.transform.rotation.y = -0.7071
-        t.transform.rotation.z = 0.0
-        t.transform.rotation.w = 0.7071
+        t.transform.rotation.x = self.offset_camera['rotation']['x']
+        t.transform.rotation.y = self.offset_camera['rotation']['y']
+        t.transform.rotation.z = self.offset_camera['rotation']['z']
+        t.transform.rotation.w = self.offset_camera['rotation']['w']
         self.tf_broadcaster.sendTransform(t)
 
     def timer_callback(self):
@@ -87,15 +81,6 @@ class PcNode(Node):
             camera_info_msg.header.frame_id = 'pc_frame'
             camera_info_msg.header.stamp = self.get_clock().now().to_msg()
             self.pub_camera_info.publish(camera_info_msg)
-
-        pose = PoseStamped()
-        pose.header.frame_id = "pc_frame"
-        pose.pose.position.x = 0.0
-        pose.pose.position.y = 0.0
-        pose.pose.position.z = 0.0
-        pose.pose.orientation.w = 1.0
-        pose.header.stamp = self.get_clock().now().to_msg()
-        self.publisher_pose.publish(pose)
 
         ret, frame = self.cap.read()
         if ret:

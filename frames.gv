@@ -1,0 +1,8 @@
+digraph G {
+"map" -> "tello_frame"[label=" Broadcaster: default_authority\nAverage rate: 10.072\nBuffer length: 5.063\nMost recent transform: 1738681677.494222\nOldest transform: 1738681672.430732\n"];
+"map" -> "pc_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1738681677.500276"[ shape=plaintext ] ;
+}->"map";
+}
