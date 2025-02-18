@@ -58,15 +58,15 @@ RUN cd opencv/build && make && make install
 RUN apt install -y ros-foxy-vision-opencv ros-foxy-message-filters libeigen3-dev
 RUN mkdir -p ../libs && cd ../libs
 
-RUN apt install -y libgl1-mesa-dev libglew-dev cmake libegl1-mesa-dev libwayland-dev libxkbcommon-dev wayland-protocols ffmpeg libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavdevice-dev libjpeg-dev libpng-dev libtiff5-dev libopenexr-dev
-RUN git clone https://github.com/stevenlovegrove/Pangolin.git
-RUN cd Pangolin && mkdir build && cd build && cmake ..
-RUN cd Pangolin/build && make && make install
+# RUN apt install -y libgl1-mesa-dev libglew-dev cmake libegl1-mesa-dev libwayland-dev libxkbcommon-dev wayland-protocols ffmpeg libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavdevice-dev libjpeg-dev libpng-dev libtiff5-dev libopenexr-dev
+# RUN git clone https://github.com/stevenlovegrove/Pangolin.git
+# RUN cd Pangolin && mkdir build && cd build && cmake ..
+# RUN cd Pangolin/build && make && make install
 
-RUN apt install -y cmake libeigen3-dev libsuitesparse-dev qtdeclarative5-dev qt5-qmake libqglviewer-dev-qt5
-RUN git clone https://github.com/RainerKuemmerle/g2o.git
-RUN cd g2o && mkdir build && cd build && cmake ..
-RUN cd g2o/build && make && make install
+# RUN apt install -y cmake libeigen3-dev libsuitesparse-dev qtdeclarative5-dev qt5-qmake libqglviewer-dev-qt5
+# RUN git clone https://github.com/RainerKuemmerle/g2o.git
+# RUN cd g2o && mkdir build && cd build && cmake ..
+# RUN cd g2o/build && make && make install
 
 RUN pip install scipy
 

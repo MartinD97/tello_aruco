@@ -28,7 +28,7 @@ class PcNode(Node):
         if not self.cap.isOpened():
             self.get_logger().error('Cannot open pc camera')
 
-        self.calibration_file = "/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration.pckl"
+        self.calibration_file = "/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration_camera_pc.pckl"
         self.camera_info = self.load_calibration_file()
 
     def load_transform_config(self, file_path):

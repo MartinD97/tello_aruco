@@ -22,12 +22,12 @@ class ArucoNode(Node):
         # Pipeline for PC Camera
         self.pc_pipeline = self.create_pipeline(
             "pc", "/pc/image_raw", "/pc/camera_info", "/pc/aruco_poses", "/pc/aruco_markers",
-            calibration_file="/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration.pckl"
+            calibration_file="/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration_camera_pc.pckl"
         )
 
         # Pipeline for Tello Camera
         self.tello_pipeline = self.create_pipeline(
-            "tello", "camera", "/tello/camera_info", "/tello/aruco_poses", "/tello/aruco_markers",
+            "tello", "/tello/image_raw", "/tello/camera_info", "/tello/aruco_poses", "/tello/aruco_markers",
             calibration_file="/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration.yaml"
         )
 
@@ -161,42 +161,6 @@ class ArucoNode(Node):
             t.transform.translation.z = pose.position.z
             t.transform.rotation = pose.orientation
             self.tf_broadcaster.sendTransform(t)
-
-    # def quaternion_to_rotation_matrix(q):
-    #     x, y, z, w = q
-    #     return np.array([
-    #         [1 - 2 * (y**2 + z**2), 2 * (x * y - z * w), 2 * (x * z + y * w)],
-    #         [2 * (x * y + z * w), 1 - 2 * (x**2 + z**2), 2 * (y * z - x * w)],
-    #         [2 * (x * z - y * w), 2 * (y * z + x * w), 1 - 2 * (x**2 + y**2)]
-    #     ])
-
-    # def rotation_matrix_to_quaternion(m):
-    #     t = np.trace(m)
-    #     if t > 0:
-    #         S = np.sqrt(t + 1.0) * 2
-    #         w = 0.25 * S
-    #         x = (m[2, 1] - m[1, 2]) / S
-    #         y = (m[0, 2] - m[2, 0]) / S
-    #         z = (m[1, 0] - m[0, 1]) / S
-    #     elif (m[0, 0] > m[1, 1]) and (m[0, 0] > m[2, 2]):
-    #         S = np.sqrt(1.0 + m[0, 0] - m[1, 1] - m[2, 2]) * 2
-    #         w = (m[2, 1] - m[1, 2]) / S
-    #         x = 0.25 * S
-    #         y = (m[0, 1] + m[1, 0]) / S
-    #         z = (m[0, 2] + m[2, 0]) / S
-    #     elif m[1, 1] > m[2, 2]:
-    #         S = np.sqrt(1.0 + m[1, 1] - m[0, 0] - m[2, 2]) * 2
-    #         w = (m[0, 2] - m[2, 0]) / S
-    #         x = (m[0, 1] + m[1, 0]) / S
-    #         y = 0.25 * S
-    #         z = (m[1, 2] + m[2, 1]) / S
-    #     else:
-    #         S = np.sqrt(1.0 + m[2, 2] - m[0, 0] - m[1, 1]) * 2
-    #         w = (m[1, 0] - m[0, 1]) / S
-    #         x = (m[0, 2] + m[2, 0]) / S
-    #         y = (m[1, 2] + m[2, 1]) / S
-    #         z = 0.25 * S
-    #     return np.array([x, y, z, w])
 
 def main():
     rclpy.init()
