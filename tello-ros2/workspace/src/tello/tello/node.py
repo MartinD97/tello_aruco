@@ -100,7 +100,7 @@ class TelloNode():
 
     # Setup ROS publishers of the node.
     def setup_publishers(self):
-        self.pub_image_raw = self.node.create_publisher(Image, 'tello/image_raw', 1)
+        self.pub_image_raw = self.node.create_publisher(Image, 'tello/image_raw/Image', 1)
         self.pub_camera_info = self.node.create_publisher(CameraInfo, 'tello/camera_info', 1)
         self.pub_status = self.node.create_publisher(TelloStatus, 'tello/status', 1)
         self.pub_id = self.node.create_publisher(TelloID, 'tello/id', 1)
@@ -122,11 +122,11 @@ class TelloNode():
         self.sub_control = self.node.create_subscription(Twist, 'control', self.cb_control, 1)
         self.sub_flip = self.node.create_subscription(String, 'flip', self.cb_flip, 1)
         self.sub_wifi_config = self.node.create_subscription(TelloWifiConfig, 'wifi_config', self.cb_wifi_config, 1)
-        self.xyz_orbslam = self.node.create_subscription(Point, '/vicon/Tello_42/Tello_42', self.pointmsg, 1)
+        self.xyz_orbslam = self.node.create_subscription(PoseStamped, '/vicon/Tello_42/Tello_42', self.pointmsg, 1)
 
     def pointmsg(self, msg):
         # set for us configuration
-        self.position = [msg.pose.position.z, -msg.pose.position.x, -msg.pose.position.y]
+        self.position = [msg.pose.position.x, msg.pose.position.y, msg.pose.position.z]
         self.node.get_logger().info(f"Received: x={self.position[0]:.3f}, y={self.position[0]:.3f}, z={self.position[2]:.3f}")
 
     # Get the orientation of the drone as a quaternion
@@ -134,24 +134,24 @@ class TelloNode():
         # in order, rotation of axes x, y, z
         deg_to_rad = math.pi / 180.0
         return euler_to_quaternion([
-            self.tello.get_roll() * deg_to_rad,
-            self.tello.get_pitch() * deg_to_rad,
-            -(self.tello.get_yaw() * deg_to_rad)
+            -(self.tello.get_yaw() * deg_to_rad),
+            -(self.tello.get_pitch() * deg_to_rad),
+            self.tello.get_roll() * deg_to_rad
         ])
 
     # Start drone info thread
     def start_tello_odom(self, rate=1.0/10.0):
         def status_odom():
             while True:
-                matrix_rot = np.array([
-                    [0, 0, 1],
-                    [0, -1, 0],
-                    [1, 0, 0]
-                ])
+                # matrix_rot = np.array([
+                #     [0, 0, 1],
+                #     [0, -1, 0],
+                #     [1, 0, 0]
+                # ])
                 q = self.get_orientation_quaternion()
-                q_matrix = R.from_quat(q).as_matrix()
-                prod_matrix = np.dot(matrix_rot, q_matrix)
-                q = R.from_matrix(prod_matrix).as_quat()
+                # q_matrix = R.from_quat(q).as_matrix()
+                # prod_matrix = np.dot(matrix_rot, q_matrix)
+                # q = R.from_matrix(prod_matrix).as_quat()
 
                 # TF
                 if self.tf_pub:

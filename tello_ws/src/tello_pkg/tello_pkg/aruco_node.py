@@ -27,7 +27,7 @@ class ArucoNode(Node):
 
         # Pipeline for Tello Camera
         self.tello_pipeline = self.create_pipeline(
-            "tello", "/tello/image_raw", "/tello/camera_info", "/tello/aruco_poses", "/tello/aruco_markers",
+            "tello", "/tello/image_raw/Image", "/tello/camera_info", "/tello/aruco_poses", "/tello/aruco_markers",
             calibration_file="/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration.yaml"
         )
 
@@ -108,20 +108,26 @@ class ArucoNode(Node):
                 pose.position.y = tvecs[i][0][1]
                 pose.position.z = tvecs[i][0][2]
 
-                # rot_matrix_x = np.array([
+                # rot_matrix_add = np.array([
                 #     [1, 0, 0],
                 #     [0, np.cos(np.pi / 2), -np.sin(np.pi / 2)],
                 #     [0, np.sin(np.pi / 2), np.cos(np.pi / 2)]
                 # ])
+                rot_matrix_add = np.array([
+                    [1, 0, 0],
+                    [0, -1, 0],
+                    [0, 0, 1]
+                ])
 
-                rot_matrix = np.eye(4)
-                rot_matrix[0:3, 0:3] = cv2.Rodrigues(np.array(rvecs[i][0]))[0]
-                # rot_matrix = np.dot(rot_matrix, rot_matrix_x)
-                quat = tf_transformations.quaternion_from_matrix(rot_matrix)
+                rot_matrix = cv2.Rodrigues(np.array(rvecs[i][0]))[0]
+                rot_matrix = np.dot(rot_matrix_add, rot_matrix)
+                rot_matrix_hom = np.eye(4)
+                rot_matrix_hom[:3, :3] = rot_matrix
+                quat = tf_transformations.quaternion_from_matrix(rot_matrix_hom)
 
-                pose.orientation.x = quat[0]
-                pose.orientation.y = quat[1]
-                pose.orientation.z = quat[2]
+                pose.orientation.x = -quat[2]
+                pose.orientation.y = quat[0]
+                pose.orientation.z = -quat[1]
                 pose.orientation.w = quat[3]
 
                 pose_array.poses.append(pose)
@@ -142,11 +148,12 @@ class ArucoNode(Node):
             t.header.stamp = self.get_clock().now().to_msg()
             t.header.frame_id = frame_id
             t.child_frame_id = f"aruco_marker_{marker_id}"
-            offset_x = -0.05
-            offset_y = +0.1
-            t.transform.translation.x = -pose.position.y + offset_x
-            t.transform.translation.y = pose.position.x + offset_y
-            t.transform.translation.z = pose.position.z
+            offset_x = 0.0
+            offset_y = -0.13
+            offset_z = -0.08
+            t.transform.translation.x = pose.position.z + offset_x
+            t.transform.translation.y = -pose.position.x + offset_y
+            t.transform.translation.z = -pose.position.y + offset_z
             t.transform.rotation = pose.orientation
             self.tf_broadcaster.sendTransform(t)
         elif frame_id == "tello_frame":
@@ -156,9 +163,10 @@ class ArucoNode(Node):
             t.child_frame_id = f"aruco_marker_{marker_id}"
             offset_x = 0.0
             offset_y = 0.0
-            t.transform.translation.x = -pose.position.y + offset_x
-            t.transform.translation.y = pose.position.x + offset_y
-            t.transform.translation.z = pose.position.z
+            offset_z = 0.0
+            t.transform.translation.x = pose.position.z + offset_x
+            t.transform.translation.y = -pose.position.x + offset_y
+            t.transform.translation.z = -pose.position.y + offset_z
             t.transform.rotation = pose.orientation
             self.tf_broadcaster.sendTransform(t)
 
