@@ -30,7 +30,8 @@ setup(
             'keep_alive = tello_pkg.keep_alive:main',
             'camera_test = tello_pkg.camera_test:main',
             'target_pose = tello_pkg.target_pose:main',
-            'convert_pckl_yaml = tello_pkg.convert_pckl_yaml:main'
+            'convert_pckl_yaml = tello_pkg.convert_pckl_yaml:main',
+            'camera_for_calib = tello_pkg.camera_for_calib:main'
         ],
     },
 )

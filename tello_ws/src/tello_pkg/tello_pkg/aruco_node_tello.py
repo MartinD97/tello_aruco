@@ -52,7 +52,7 @@ class ArucoNode(rclpy.node.Node):
         # Declare and read parameters
         self.declare_parameter(
             name="marker_size",
-            value=0.0625,
+            value=0.1,
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_DOUBLE,
                 description="Size of the markers in meters.",
@@ -70,7 +70,7 @@ class ArucoNode(rclpy.node.Node):
 
         self.declare_parameter(
             name="image_topic",
-            value="camera",
+            value="tello/image_raw/Image",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
                 description="Image topic to subscribe to.",
@@ -97,7 +97,7 @@ class ArucoNode(rclpy.node.Node):
 
         self.declare_parameter(
             name="calibration_file",
-            value="/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration.yaml",
+            value="/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/config/calibration_tello.yaml",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
                 description="Path to camera calibration file (pickle format).",
@@ -135,7 +135,7 @@ class ArucoNode(rclpy.node.Node):
         # Make sure we have a valid dictionary id:
         try:
             dictionary_id = cv2.aruco.__getattribute__(dictionary_id_name)
-            if type(dictionary_id) != type(cv2.aruco.DICT_4X4_100):
+            if type(dictionary_id) != type(cv2.aruco.DICT_ARUCO_ORIGINAL):
                 raise AttributeError
         except AttributeError:
             self.get_logger().error(

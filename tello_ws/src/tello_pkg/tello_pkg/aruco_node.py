@@ -22,13 +22,13 @@ class ArucoNode(Node):
         # Pipeline for PC Camera
         self.pc_pipeline = self.create_pipeline(
             "pc", "/pc/image_raw", "/pc/camera_info", "/pc/aruco_poses", "/pc/aruco_markers",
-            calibration_file="/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration_camera_pc.pckl"
+            "/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/config/calibration_pc.yaml"
         )
 
         # Pipeline for Tello Camera
         self.tello_pipeline = self.create_pipeline(
             "tello", "/tello/image_raw/Image", "/tello/camera_info", "/tello/aruco_poses", "/tello/aruco_markers",
-            calibration_file="/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration.yaml"
+            "/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/config/calibration_tello.yaml"
         )
 
     def create_pipeline(self, prefix, image_topic, info_topic, poses_topic, markers_topic, calibration_file):
@@ -48,9 +48,11 @@ class ArucoNode(Node):
             try:
                 with open(calibration_file, 'r') as f:
                     calibration_data = yaml.safe_load(f)
-                    pipeline["intrinsic_mat"] = np.array(calibration_data['camera_matrix']['data']).reshape((3, 3))
+                    pipeline["intrinsic_mat"] = np.array(calibration_data['camera_matrix']['data']).reshape(3, 3)
                     pipeline["distortion"] = np.array(calibration_data['distortion_coefficients']['data'])
                     self.get_logger().info(f"Loaded calibration for {prefix} from {calibration_file}")
+                    #self.get_logger().info(f'{pipeline["intrinsic_mat"]}')
+                    #self.get_logger().info(f'{pipeline["distortion"]}')
             except Exception as e:
                 self.get_logger().error(f"Failed to load {prefix} calibration file: {e}")
 
@@ -75,7 +77,7 @@ class ArucoNode(Node):
         return pipeline
 
     def info_callback(self, info_msg, pipeline):
-        pipeline["intrinsic_mat"] = np.reshape(np.array(info_msg.k), (3, 3))
+        pipeline["intrinsic_mat"] = np.array(info_msg.k).reshape(3, 3)
         pipeline["distortion"] = np.array(info_msg.d)
 
     def image_callback(self, img_msg, pipeline):
@@ -97,22 +99,17 @@ class ArucoNode(Node):
             markers.header = pose_array.header
 
             rvecs, tvecs, _ = cv2.aruco.estimatePoseSingleMarkers(
-                marker_corners, 0.0625, intrinsic_mat, distortion
+                marker_corners, 0.10, intrinsic_mat, distortion
             )
             
-            MIN_MARKER_AREA = 1000 
+            # MIN_MARKER_AREA = 1000 
             for i, marker_id in enumerate(marker_ids):
-                if cv2.contourArea(marker_corners[i]) < MIN_MARKER_AREA: continue
+                # if cv2.contourArea(marker_corners[i][0]) < MIN_MARKER_AREA: continue # check [0]
                 pose = Pose()
                 pose.position.x = tvecs[i][0][0]
                 pose.position.y = tvecs[i][0][1]
                 pose.position.z = tvecs[i][0][2]
 
-                # rot_matrix_add = np.array([
-                #     [1, 0, 0],
-                #     [0, np.cos(np.pi / 2), -np.sin(np.pi / 2)],
-                #     [0, np.sin(np.pi / 2), np.cos(np.pi / 2)]
-                # ])
                 rot_matrix_add = np.array([
                     [1, 0, 0],
                     [0, -1, 0],
@@ -136,10 +133,10 @@ class ArucoNode(Node):
 
                 self.publish_marker_tf(marker_id[0], pose, img_msg.header.frame_id)
 
-            if len(pose_array.poses) > 0:
+            if pose_array.poses:
                 pipeline["poses_pub"].publish(pose_array)
                 pipeline["markers_pub"].publish(markers)
-            else: return
+
 
     def publish_marker_tf(self, marker_id, pose, frame_id):
         if not frame_id or frame_id == "": frame_id = "tello_frame"
@@ -149,8 +146,8 @@ class ArucoNode(Node):
             t.header.frame_id = frame_id
             t.child_frame_id = f"aruco_marker_{marker_id}"
             offset_x = 0.0
-            offset_y = -0.13
-            offset_z = -0.08
+            offset_y = 0.0
+            offset_z = 0.0
             t.transform.translation.x = pose.position.z + offset_x
             t.transform.translation.y = -pose.position.x + offset_y
             t.transform.translation.z = -pose.position.y + offset_z

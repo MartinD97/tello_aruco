@@ -1,130 +1,193 @@
-import rclpy
-from rclpy.node import Node
-from geometry_msgs.msg import PoseArray, Twist, PoseStamped, Point
-from sensor_msgs.msg import Image
-import math
-import time
-import cv2
-from cv_bridge import CvBridge
+import rclpy, math, time, cv2, yaml
+import tf_transformations as tf
 import numpy as np
-import tf_transformations
+from rclpy.node import Node
+from geometry_msgs.msg import Twist, PoseStamped, PoseArray
+from nav_msgs.msg import Odometry
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
+from ros2_aruco_interfaces.msg import ArucoMarkers
 
-class TelloMarkerFollower(Node):
+class TelloController(Node):
     def __init__(self):
-        super().__init__('tello_marker_follower')
+        super().__init__('tello_controller')
+        # PID's parameters
+        self.kp, self.ki, self.kd = 1.5, 0.05, 0.2
+        self.error_sum_x = self.error_sum_y = self.error_sum_z = self.error_sum_yaw = 0.0
+        self.last_error_x = self.last_error_y = self.last_error_z = self.last_error_yaw = 0.0
 
-        # Parametri configurabili
-        self.declare_parameter('target_distance', 1.0)  # Distanza desiderata dal marker
-        self.declare_parameter('linear_speed', 0.3)
-        self.declare_parameter('angular_speed', 0.3)
-        self.declare_parameter('pose_timeout', 3.0)  # Timeout per considerare un marker "non più valido"
+        # Home
+        self.home_x, self.home_y, self.home_z, self.home_yaw = 0.0, 0.0, 1.5, 0.0
+        self.target_x, self.target_y, self.target_z, self.target_yaw = self.home_x, self.home_y, self.home_z, self.home_yaw
 
-        self.target_distance = self.get_parameter('target_distance').value
-        self.linear_speed = self.get_parameter('linear_speed').value
-        self.angular_speed = self.get_parameter('angular_speed').value
-        self.pose_timeout = self.get_parameter('pose_timeout').value
-
-        self.offset_camera = self.load_transform_config('/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/offset_camera.yaml')
-        self.pc_rotation_matrix = tf_transformations.quaternion_matrix(self.offset_camera['rotation'])[:3, :3]
-
-        self.bridge = CvBridge()
+        # State of drone
+        self.tello_x = self.tello_y = self.tello_z = self.tello_yaw = 0.0
+        self.drone_pose = None
         self.image = None
-        self.pose_buffer = {}  # Salviamo i marker con timestamp
-        self.drone_pose = None  # Posizione globale del drone
+        self.pose_buffer = {}
+        self.bridge = CvBridge()
+        self.seen_markers = set()
 
-        # Sottoscrizione ai topic
-        self.create_subscription(PoseArray, '/pc/aruco_poses', self.aruco_pose_callback, 10)  # Marker in coordinate globali
-        self.create_subscription(PoseStamped, '/vicon/Tello_42/Tello_42', self.vicon_callback, 10)  # Posizione globale del drone
-        self.create_subscription(Image, '/tello/image_raw/Image', self.camera_callback, 10)  # Visione della telecamera del drone
+        # Timeout marker
+        self.last_marker_time = time.time()
+        self.marker_timeout = 2  # secondi
 
-        # Publisher per il controllo del drone
-        self.cmd_vel_publisher = self.create_publisher(Twist, 'control', 10) #cmd_vel ??
-        
-        # Timer per navigare verso i marker
-        self.create_timer(0.1, self.navigate_to_marker)
+        # Marker's parameters
+        self.dist_tolerance = 0.1
+        self.dist_from_marker = 0.30
+        self.linear_speed = 25.0
+        self.angular_speed = 50.0
+        self.pose_timeout = 3.0
 
-    def aruco_pose_callback(self, msg: PoseArray):
-        current_time = time.time()
-        for idx, pose in enumerate(msg.poses):
-            global_position = self.transform_marker_to_global(pose)
-            marker_id = f"marker_{idx}"
-            self.pose_buffer[marker_id] = {
-                "x": global_position[0],
-                "y": global_position[1],
-                "z": global_position[2]
-            }
+        # Flag
+        self.flag_target = 0
+        self.flag_tello_aruco = False
 
-        # Rimuove marker scaduti
-        self.get_logger().info(f"Marker {marker_id} in coordinate globali: {global_position}")
-        self.pose_buffer = {k: v for k, v in self.pose_buffer.items() if current_time - v["timestamp"] < self.pose_timeout}
+        # Load offset camera
+        self.offset_camera = self.load_transform_config('/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/config/offset_camera.yaml')
+        self.pc_x = self.offset_camera['translation']['x']
+        self.pc_y = self.offset_camera['translation']['y']
+        self.pc_z = self.offset_camera['translation']['z']
 
-    def transform_marker_to_global(self, marker_pose):
-        marker_position = np.array([marker_pose.position.x, marker_pose.position.y, marker_pose.position.z])
-        global_position = self.pc_rotation_matrix @ marker_position + self.offset_camera['translation']
-        return global_position
+        # Publisher e Subscriber
+        self.cmd_pub = self.create_publisher(Twist, 'control', 10)
+        self.pose_sub = self.create_subscription(PoseStamped, '/vicon/Tello_42/Tello_42', self.vicon_callback, 10)
+        self.marker_sub = self.create_subscription(ArucoMarkers, '/pc/aruco_markers', self.aruco_pose_callback, 10)
+        self.marker_tello_sub = self.create_subscription(ArucoMarkers, '/tello/aruco_markers', self.aruco_pose_tello_callback, 10)
+        self.image_sub = self.create_subscription(Image, '/tello/image_raw/Image', self.camera_callback, 10)
 
-    def vicon_callback(self, msg: PoseStamped):
-        self.drone_pose = {
-            "x": msg.pose.position.x,
-            "y": msg.pose.position.y,
-            "z": msg.pose.position.z
-        }
+        self.create_timer(0.1, self.control_loop)
 
-    def camera_callback(self, msg: Image):
-        """Riceve l'immagine dalla telecamera del drone."""
+    def load_transform_config(self, file_path):
+        with open(file_path, 'r') as file:
+            return yaml.safe_load(file)
+
+    def vicon_callback(self, msg):
+        self.tello_x = msg.pose.position.x
+        self.tello_y = msg.pose.position.y
+        self.tello_z = msg.pose.position.z
+        q = msg.pose.orientation
+        _, _, self.tello_yaw = tf.euler_from_quaternion([q.x, q.y, q.z, q.w]) # CHECK ORIENTATION
+        self.drone_pose = {"x": self.tello_x, "y": self.tello_y, "z": self.tello_z}
+
+    def aruco_pose_callback(self, msg):
+        if msg.marker_ids[0] != 0 and msg.marker_ids[0] < 50:
+            current_time = time.time()
+            for idx, pose in enumerate(msg.poses):
+                marker_id = f"marker_{msg.marker_ids[0]}"
+                if marker_id not in self.seen_markers:
+                    self.pose_buffer[marker_id] = {
+                        "x": pose.position.x + self.pc_x, 
+                        "y": pose.position.z + self.pc_y, 
+                        "z": -pose.position.y + self.pc_z,
+                        "timestamp": current_time
+                    }
+                    #self.get_logger().info(f"add marker: {self.pose_buffer[marker_id]}")
+                    #self.get_logger().info(f"add marker id: {msg.marker_ids[0]}")
+            self.pose_buffer = {k: v for k, v in self.pose_buffer.items() if current_time - v["timestamp"] < self.pose_timeout}
+            if self.pose_buffer:
+                self.last_marker_time = current_time
+
+    def aruco_pose_tello_callback(self, msg):
+        if msg.marker_ids[0] != 0 and msg.marker_ids[0] < 50: self.flag_tello_aruco = True
+
+    def camera_callback(self, msg):
         self.image = self.bridge.imgmsg_to_cv2(msg, "bgr8")
 
-    def navigate_to_marker(self):
-        """Naviga verso il marker attivo e si centra su di esso quando lo vede con la telecamera."""
-        if not self.drone_pose or not self.pose_buffer:
-            return  # Se il drone o i marker non sono disponibili, non fare nulla
+    def compute_pid(self, error, error_sum, last_error):
+        error_sum += error
+        delta_error = error - last_error
+        error_sum = max(min(error_sum, 5.0), -5.0)
+        if error == 0: control = 0.0
+        else: control = self.kp * error + self.ki * error_sum + self.kd * delta_error
+        control = max(min(control, 1.0), -1.0)
+        return control, error_sum, error
 
-        # Seleziona il marker più vicino
-        closest_marker = min(self.pose_buffer.items(), key=lambda m: self.distance_to_marker(m[1]))
-        marker_id, marker_pose = closest_marker
-        x, y, z = marker_pose["x"], marker_pose["y"], marker_pose["z"]
-
-        # Calcola la distanza tra il drone e il marker
-        drone_x, drone_y, drone_z = self.drone_pose["x"], self.drone_pose["y"], self.drone_pose["z"]
-        distance = math.sqrt((x - drone_x)**2 + (y - drone_y)**2 + (z - drone_z)**2)
-        yaw_angle = math.atan2(y - drone_y, x - drone_x)
-
-        # Comando di velocità per avvicinarsi
-        twist = Twist()
-        if distance > self.target_distance:
-            twist.linear.x = min(self.linear_speed, self.linear_speed * (distance - self.target_distance))
-            twist.angular.z = min(self.angular_speed, self.angular_speed * yaw_angle)
-        else:
-            twist.linear.x = 0.0
-            twist.angular.z = 0.0
-
-            # Se il drone vede il marker con la telecamera, scatta la foto e si ferma
-            if self.image is not None:
-                self.save_image(marker_id)
-                self.pose_buffer.pop(marker_id, None)  # Rimuove il marker raggiunto
-
-        self.cmd_vel_publisher.publish(twist)
-
-    def distance_to_marker(self, marker_pose):
-        """Calcola la distanza tra il drone e un marker dato."""
+    def control_loop(self):
         if not self.drone_pose:
-            return float('inf')
-        return math.sqrt(
-            (marker_pose["x"] - self.drone_pose["x"])**2 +
-            (marker_pose["y"] - self.drone_pose["y"])**2 +
-            (marker_pose["z"] - self.drone_pose["z"])**2
-        )
+            return
+
+        if time.time() % 1 == 0: self.flag_tello_aruco = False
+        if time.time() - self.last_marker_time > self.marker_timeout:
+            self.pose_buffer.clear()
+            self.target_x, self.target_y, self.target_z = self.home_x, self.home_y, self.home_z
+            if self.flag_target == 0 or self.flag_target == 2:
+                self.get_logger().info(f"Target to home, sec {time.time():.2f}")
+                self.flag_target = 1
+
+        if self.pose_buffer:
+            closest_marker = min(self.pose_buffer.items(), key=lambda m: self.dist_from_tello(m[1]))
+            marker_id, marker_pose = closest_marker
+            dir_x = self.pc_x - marker_pose["x"]
+            dir_y = self.pc_y - marker_pose["y"]
+            dir_z = self.pc_z - marker_pose["z"]
+            norm = np.sqrt(dir_x**2 + dir_y**2 + dir_z**2)
+            dir_x /= norm
+            dir_y /= norm
+            dir_z /= norm
+            self.target_x = marker_pose["x"] + dir_x * self.dist_from_marker
+            self.target_y = marker_pose["y"] + dir_y * self.dist_from_marker
+            self.target_z = marker_pose["z"] + dir_z * self.dist_from_marker
+            #self.target_x, self.target_y, self.target_z = marker_pose["x"], marker_pose["y"] - 0.30, marker_pose["z"]
+            if self.flag_target == 0 or self.flag_target == 1:
+                self.get_logger().info(f"Target pos: {self.target_x:.2f}, {self.target_y:.2f}, {self.target_z:.2f}")
+                self.get_logger().info(f"Marker id: {marker_id}")
+                self.flag_target = 2
+    
+        error_x = self.target_x - self.tello_x
+        error_y = self.target_y - self.tello_y
+        error_z = self.target_z - self.tello_z
+        target_angle = math.atan2(error_y, error_x) # CHECK anti orario ?
+        error_yaw = target_angle - self.tello_yaw # CHECK + math.pi ?
+        distance = self.dist_from_tello({"x": self.target_x, "y": self.target_y, "z": self.target_z})
+        speed_factor = max(0.1, min(1.0, distance))
+
+        if abs(error_yaw) >= math.pi/4: control_x, control_y, control_z = 0, 0, 0
+        else:
+            control_x, self.error_sum_x, self.last_error_x = self.compute_pid(error_x, self.error_sum_x, self.last_error_x)
+            control_y, self.error_sum_y, self.last_error_y = self.compute_pid(error_y, self.error_sum_y, self.last_error_y)
+            control_z, self.error_sum_z, self.last_error_z = self.compute_pid(error_z, self.error_sum_z, self.last_error_z)
+
+        if distance <= self.dist_tolerance and self.pose_buffer:
+            #marker = min(self.pose_buffer.values(), key=lambda m: self.dist_from_tello(m[1]))
+            target_angle = math.atan2(self.target_y - self.tello_y, self.target_x - self.tello_x) # CHECK
+            error_yaw = target_angle - self.tello_yaw # CHECK, +/- math.pi ? YES???
+            self.get_logger().info(f'YAW. cur: {self.tello_yaw:.2f}, err: {error_yaw:.2f}')
+
+        control_yaw, self.error_sum_yaw, self.last_error_yaw = self.compute_pid(error_yaw, self.error_sum_yaw, self.last_error_yaw)
+        #self.get_logger().info(f'YAW. err: {error_yaw:.2f}, contr: {control_yaw}') #cur: {self.tello_yaw:.2f}, err: {error_yaw:.2f}')
+
+        if distance <= self.dist_tolerance and error_yaw <= math.pi/4 and self.flag_tello_aruco:
+            if self.image is not None: self.get_logger().info(f"Video not received")
+            else:
+                self.save_image(marker_id)
+                self.seen_markers.add(marker_id)
+                self.get_logger().info(f"Marker processed: {marker_id}")
+                del self.pose_buffer[marker_id]  # Rimuovi il marker processato
+
+        cmd = Twist()
+        cmd.linear.x = 0.0 # control_y * self.linear_speed * speed_factor
+        if error_x > 0: cmd.linear.y = control_x * self.linear_speed * speed_factor
+        else: cmd.linear.y = - control_x * self.linear_speed * speed_factor
+        cmd.linear.z = 0.0 # control_z * self.linear_speed * speed_factor
+        if error_yaw > - math.pi: cmd.angular.z = - control_yaw * self.angular_speed
+        else: cmd.angular.z = control_yaw * self.angular_speed
+        self.cmd_pub.publish(cmd)
+
+    def dist_from_tello(self, msg):
+        return math.sqrt((msg["x"] - self.tello_x) ** 2 +
+                         (msg["y"] - self.tello_y) ** 2 +
+                         (msg["z"] - self.tello_z) ** 2)
 
     def save_image(self, marker_id):
-        """Salva l'immagine quando il drone è centrato sul marker."""
         timestamp = time.strftime("%Y%m%d-%H%M%S")
-        filename = f"{timestamp}_{marker_id}.jpg"
+        filename = f"{timestamp}_marker_{marker_id}.jpg"
         cv2.imwrite(filename, self.image)
-        self.get_logger().info(f"Immagine salvata: {filename}")
+        self.get_logger().info(f"Img saved: {filename}")
 
 def main(args=None):
     rclpy.init(args=args)
-    node = TelloMarkerFollower()
+    node = TelloController()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()

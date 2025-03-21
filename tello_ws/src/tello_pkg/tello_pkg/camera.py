@@ -27,8 +27,6 @@ class PcNode(Node):
         self.cap = cv2.VideoCapture(0)
         if not self.cap.isOpened():
             self.get_logger().error('Cannot open pc camera')
-
-        self.calibration_file = "/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration_camera_pc.pckl"
         self.camera_info = self.load_calibration_file()
 
     def load_transform_config(self, file_path):
@@ -37,21 +35,24 @@ class PcNode(Node):
 
     def load_calibration_file(self):
         try:
-            with open(self.calibration_file, 'rb') as f:
-                calibration_data = pickle.load(f)
-                self.get_logger().info(f"Calibration data loaded from {self.calibration_file}")
-                camera_matrix = calibration_data[0]
-                projection_matrix = np.zeros((3, 4))
-                projection_matrix[:3, :3] = camera_matrix
-                return {
-                    'distortion_coefficients': calibration_data[1].flatten().tolist(),
-                    'camera_matrix': calibration_data[0].flatten().tolist(),
-                    'rectification_matrix': [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0], 
-                    'projection_matrix': projection_matrix.flatten().tolist() 
-                }
+            calibration_data = self.load_transform_config('/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/config/calibration_pc.yaml')
+            self.get_logger().info(f"Calibration data loaded from calibration_pc.yaml")
+            camera_matrix = np.array(calibration_data['camera_matrix']['data']).reshape((3, 3))
+            dist_coeffs = np.array(calibration_data['distortion_coefficients']['data']).flatten()
+            projection_matrix = np.zeros((3, 4))
+            projection_matrix[:3, :3] = camera_matrix
+
+            return {
+                'distortion_coefficients': dist_coeffs.flatten().tolist(),
+                'camera_matrix': camera_matrix.flatten().tolist(),
+                'rectification_matrix': [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0],  # Matrice identità 3x3
+                'projection_matrix': projection_matrix.flatten().tolist()
+            }
+
         except Exception as e:
             self.get_logger().error(f"Errore durante il caricamento del file di calibrazione: {e}")
             return None
+
 
     def create_pc_frame(self):
         t = TransformStamped()

@@ -35,7 +35,7 @@ class TelloNode():
 
         self.node.declare_parameter(
             name="calibration_file",
-            value="/root/tello_MD/wrk_src/tello-ros2/slam/src/orbslam2/config.yaml",
+            value="/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration_tello.yaml",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
                 description="Path to camera calibration file (yaml format).",
@@ -67,12 +67,11 @@ class TelloNode():
 
         # Check if camera info file was received as argument
         if len(self.camera_info_file) == 0:
-            share_directory = ament_index_python.get_package_share_directory('tello')
-            self.camera_info_file = share_directory + '/ost.yaml'
+            self.camera_info_file = '/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration_tello.yaml'
 
         with open(self.camera_info_file, 'r') as file:
            self.camera_info = yaml.load(file, Loader=yaml.FullLoader)
-           self.node.get_logger().info('Tello: Camera information YAML' + self.camera_info.__str__())
+           self.node.get_logger().info(f'Tello: Camera information YAML loaded {self.camera_info}')
 
         # Configure drone connection
         Tello.TELLO_IP = self.tello_ip
@@ -109,6 +108,7 @@ class TelloNode():
         self.pub_temperature = self.node.create_publisher(Temperature, 'tello/temperature', 1)
         self.pub_odom = self.node.create_publisher(Odometry, 'tello/odom', 1)
         self.publisher_pose = self.node.create_publisher(PoseStamped, 'tello/pose', 10)
+        self.publisher_yaw = self.node.create_publisher(PoseStamped, 'tello/yaw', 10)
 
         # TF broadcaster
         if self.tf_pub:
@@ -124,15 +124,21 @@ class TelloNode():
         self.sub_wifi_config = self.node.create_subscription(TelloWifiConfig, 'wifi_config', self.cb_wifi_config, 1)
         self.xyz_orbslam = self.node.create_subscription(PoseStamped, '/vicon/Tello_42/Tello_42', self.pointmsg, 1)
 
+
     def pointmsg(self, msg):
         # set for us configuration
         self.position = [msg.pose.position.x, msg.pose.position.y, msg.pose.position.z]
-        self.node.get_logger().info(f"Received: x={self.position[0]:.3f}, y={self.position[0]:.3f}, z={self.position[2]:.3f}")
+        #self.node.get_logger().info(f"Received: x={self.position[0]:.3f}, y={self.position[0]:.3f}, z={self.position[2]:.3f}")
 
     # Get the orientation of the drone as a quaternion
     def get_orientation_quaternion(self):
         # in order, rotation of axes x, y, z
         deg_to_rad = math.pi / 180.0
+        yaw = PoseStamped()
+        yaw.pose.orientation.x = -(self.tello.get_yaw() * deg_to_rad)
+        yaw.pose.orientation.y = -(self.tello.get_pitch() * deg_to_rad)
+        yaw.pose.orientation.z = self.tello.get_roll() * deg_to_rad
+        self.publisher_yaw.publish(yaw)
         return euler_to_quaternion([
             -(self.tello.get_yaw() * deg_to_rad),
             -(self.tello.get_pitch() * deg_to_rad),
@@ -233,6 +239,7 @@ class TelloNode():
                     msg = BatteryState()
                     msg.header.frame_id = self.tf_drone
                     msg.percentage = float(self.tello.get_battery())
+                    if msg.percentage % 10 == 0: self.node.get_logger().info(f'Battery: {msg.percentage}')
                     msg.voltage = 3.8
                     msg.design_capacity = 1.1
                     msg.present = True
@@ -245,6 +252,7 @@ class TelloNode():
                     msg = Temperature()
                     msg.header.frame_id = self.tf_drone
                     msg.temperature = self.tello.get_temperature()
+                    if msg.temperature % 10 == 0: self.node.get_logger().info(f'Temperature: {msg.temperature}')
                     msg.variance = 0.0
                     self.pub_temperature.publish(msg)
 
@@ -284,17 +292,17 @@ class TelloNode():
                     msg.sdk_version = self.tello.query_sdk_version()
                     msg.serial_number = self.tello.query_serial_number()
                     self.pub_id.publish(msg)
-
+ 
                 # Camera info
                 if self.pub_camera_info.get_subscription_count() > 0:
                     msg = CameraInfo()
-                    msg.height = self.camera_info.image_height
-                    msg.width = self.camera_info.image_width
-                    msg.distortion_model = self.camera_info.distortion_model
-                    msg.D = self.camera_info.distortion_coefficients
-                    msg.K = self.camera_info.camera_matrix
-                    msg.R = self.camera_info.rectification_matrix
-                    msg.P = self.camera_info.projection_matrix
+                    msg.height = self.camera_info["image_height"]
+                    msg.width = self.camera_info["image_width"]
+                    msg.distortion_model = self.camera_info["distortion_model"]
+                    msg.D = self.camera_info["distortion_coefficients"]["data"]
+                    msg.K = self.camera_info["camera_matrix"]["data"]
+                    msg.R = self.camera_info["rectification_matrix"]["data"]
+                    msg.P = self.camera_info["projection_matrix"]["data"]
                     self.pub_camera_info.publish(msg)
 
                 # Sleep
@@ -358,6 +366,7 @@ class TelloNode():
     # Receives the linear and angular velocities to be applied from -100 to 100.
     def cb_control(self, msg):
         self.tello.send_rc_control(int(msg.linear.x), int(msg.linear.y), int(msg.linear.z), int(msg.angular.z))
+        #self.node.get_logger().info(f"cb_control: {msg}")
 
     # Configure the wifi credential that should be used by the drone.
     #
