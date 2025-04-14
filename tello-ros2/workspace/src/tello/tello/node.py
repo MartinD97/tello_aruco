@@ -35,7 +35,7 @@ class TelloNode():
 
         self.node.declare_parameter(
             name="calibration_file",
-            value="/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration_tello.yaml",
+            value="/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/config/calibration_tello.yaml",
             descriptor=ParameterDescriptor(
                 type=ParameterType.PARAMETER_STRING,
                 description="Path to camera calibration file (yaml format).",
@@ -67,7 +67,7 @@ class TelloNode():
 
         # Check if camera info file was received as argument
         if len(self.camera_info_file) == 0:
-            self.camera_info_file = '/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/calibration_tello.yaml'
+            self.camera_info_file = '/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/config/calibration_tello.yaml'
 
         with open(self.camera_info_file, 'r') as file:
            self.camera_info = yaml.load(file, Loader=yaml.FullLoader)

@@ -145,12 +145,9 @@ class ArucoNode(Node):
             t.header.stamp = self.get_clock().now().to_msg()
             t.header.frame_id = frame_id
             t.child_frame_id = f"aruco_marker_{marker_id}"
-            offset_x = 0.0
-            offset_y = 0.0
-            offset_z = 0.0
-            t.transform.translation.x = pose.position.z + offset_x
-            t.transform.translation.y = -pose.position.x + offset_y
-            t.transform.translation.z = -pose.position.y + offset_z
+            t.transform.translation.x = pose.position.z
+            t.transform.translation.y = -pose.position.x
+            t.transform.translation.z = -pose.position.y
             t.transform.rotation = pose.orientation
             self.tf_broadcaster.sendTransform(t)
         elif frame_id == "tello_frame":
@@ -158,12 +155,9 @@ class ArucoNode(Node):
             t.header.stamp = self.get_clock().now().to_msg()
             t.header.frame_id = frame_id
             t.child_frame_id = f"aruco_marker_{marker_id}"
-            offset_x = 0.0
-            offset_y = 0.0
-            offset_z = 0.0
-            t.transform.translation.x = pose.position.z + offset_x
-            t.transform.translation.y = -pose.position.x + offset_y
-            t.transform.translation.z = -pose.position.y + offset_z
+            t.transform.translation.x = pose.position.z
+            t.transform.translation.y = -pose.position.x
+            t.transform.translation.z = -pose.position.y
             t.transform.rotation = pose.orientation
             self.tf_broadcaster.sendTransform(t)
 

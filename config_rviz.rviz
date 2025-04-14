@@ -6,7 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /TF1/Frames1
       Splitter Ratio: 0.5
     Tree Height: 351
   - Class: rviz_common/Selection
@@ -48,16 +47,32 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        aruco_marker_0:
+          Value: false
+        aruco_marker_1023:
+          Value: false
+        aruco_marker_2:
+          Value: true
+        aruco_marker_277:
+          Value: true
+        aruco_marker_340:
+          Value: false
+        aruco_marker_341:
+          Value: false
         map:
           Value: false
         pc_frame:
           Value: true
+        tello_frame:
+          Value: true
+        vicon/Tello_42/Tello_42:
+          Value: true
         vicon/World:
-          Value: false
+          Value: true
         vicon/aruco42/aruco42:
-          Value: false
-        vicon/turtlebot3/turtlebot3:
-          Value: false
+          Value: true
+        vicon/uav1/uav1:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
@@ -66,7 +81,19 @@ Visualization Manager:
       Tree:
         map:
           pc_frame:
-            {}
+            aruco_marker_0:
+              {}
+            aruco_marker_1023:
+              {}
+            aruco_marker_2:
+              {}
+          tello_frame:
+            aruco_marker_277:
+              {}
+            aruco_marker_340:
+              {}
+            aruco_marker_341:
+              {}
       Update Interval: 0
       Value: true
     - Class: rviz_default_plugins/Image
@@ -112,6 +139,9 @@ Visualization Manager:
     - Class: rviz_default_plugins/Measure
       Line color: 128; 128; 0
     - Class: rviz_default_plugins/SetInitialPose
+      Covariance x: 0.25
+      Covariance y: 0.25
+      Covariance yaw: 0.06853891909122467
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -140,25 +170,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 8.617578506469727
+      Distance: 8.228314399719238
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.8069186806678772
-        Y: 0.9462989568710327
-        Z: -0.8812157511711121
+        X: 0.6191185712814331
+        Y: -0.7052106261253357
+        Z: -0.925102949142456
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.47539806365966797
+      Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.8504085540771484
+      Yaw: 1.5754070281982422
     Saved: ~
 Window Geometry:
   Displays:

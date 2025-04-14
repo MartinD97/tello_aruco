@@ -16,7 +16,7 @@ class PcNode(Node):
     def __init__(self):
         super().__init__('pc_node')
         self.tf_broadcaster = tf2_ros.StaticTransformBroadcaster(self)
-        self.offset_camera = self.load_transform_config('/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/offset_camera.yaml')
+        self.offset_camera = self.load_transform_config('/root/tello_MD/wrk_src/tello_ws/src/tello_pkg/tello_pkg/config/offset_camera.yaml')
         self.publisher_image = self.create_publisher(Image, 'pc/image_raw', 10)
         self.pub_camera_info = self.create_publisher(CameraInfo, 'pc/camera_info', 10)
         self.publisher_pose = self.create_publisher(PoseStamped, 'pc/pose', 10)
