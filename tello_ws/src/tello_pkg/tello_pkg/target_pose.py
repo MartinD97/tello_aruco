@@ -46,9 +46,9 @@ class TelloController(Node):
 
         # Marker's parameters
         self.dist_tolerance = 0.3
-        self.yaw_tolerance = math.pi/4
-        self.dist_from_marker = 0.4
-        self.linear_speed = 25.0
+        self.yaw_tolerance = math.pi/9
+        self.dist_from_marker = 0.5
+        self.linear_speed = 20.0
         self.angular_speed = 50.0
         self.pose_timeout = 3.0
         
@@ -328,7 +328,10 @@ class TelloController(Node):
         if self.last_vicon_time > time.time() - 0.5:
             cmd.linear.x = 0.0
             if abs(error_yaw) >= self.yaw_tolerance: cmd.linear.y = 0.0
-            else: cmd.linear.y = self.linear_speed * np.clip(abs(distance), 0.0, 1.0)
+            elif 0.05 < distance < 0.3:
+                min_speed = 0.20 * self.linear_speed
+                cmd.linear.y = min_speed + (self.linear_speed - min_speed) * np.clip(distance, 0.0, 1.0)
+            else: cmd.linear.y = self.linear_speed * np.clip(distance, 0.0, 1.0)
             cmd.linear.z = self.linear_speed * np.clip(error_z, -1.0, 1.0)
             cmd.angular.z = - self.angular_speed * np.clip(error_yaw, -1.0, 1.0)
 
