@@ -26,7 +26,7 @@ class TelloController(Node):
         self.last_error_x = self.last_error_y = self.last_error_z = self.last_error_yaw = 0.0
 
         # Home
-        self.home_x, self.home_y, self.home_z, self.home_yaw = 0.0, 0.0, 2.0, 0.0
+        self.home_x, self.home_y, self.home_z, self.home_yaw = 0.0, 0.0, 1.5, 0.0
         self.target_x, self.target_y, self.target_z, self.target_yaw = self.home_x, self.home_y, self.home_z, self.home_yaw
 
         # State of drone
@@ -48,9 +48,12 @@ class TelloController(Node):
         self.dist_tolerance = 0.3
         self.yaw_tolerance = math.pi/9
         self.dist_from_marker = 0.5
-        self.linear_speed = 20.0
-        self.angular_speed = 50.0
+        self.linear_speed = 30.0
+        self.angular_speed = 40.0
         self.pose_timeout = 3.0
+
+        self.marker2 = [1.8, 0.3, 1.0]
+        self.marker4 = [1.2, -0.3, 1.0]
         
         # Flag
         self.flag_target = 0
@@ -71,7 +74,7 @@ class TelloController(Node):
         # Graph
         self.drone_trajectory = []  # (timestamp, x, y, z)
         self.last_plot_time = time.time()
-        self.plot_interval = 10.0  # sec
+        self.plot_interval = 5.0  # sec
         self.marker_errors = {}
         
         self.create_timer(0.01, self.control_loop)
@@ -94,7 +97,7 @@ class TelloController(Node):
         self.tello_y = msg.pose.position.y
         self.tello_z = msg.pose.position.z
         q = msg.pose.orientation
-        _, _, self.tello_yaw = tf.euler_from_quaternion([q.x, q.y, q.z, q.w])# CHECK ORIENTATION
+        _, _, self.tello_yaw = tf.euler_from_quaternion([q.x, q.y, q.z, q.w])
         self.drone_pose = {"x": self.tello_x, "y": self.tello_y, "z": self.tello_z}
         self.last_vicon_time = time.time()
         #self.get_logger().info(f'YAW. err: {self.tello_yaw:.2f}')
@@ -143,14 +146,11 @@ class TelloController(Node):
             
             for idx, pose in enumerate(msg.poses):
                 marker_id = f"marker_{msg.marker_ids[idx]}"
+
                 
-                local_x = pose.position.x
-                local_y = pose.position.y
-                local_z = pose.position.z
-                
-                global_x = self.tello_x + local_x
-                global_y = self.tello_y + local_y
-                global_z = self.tello_z + local_y
+                global_x = self.tello_x + pose.position.z * math.cos(self.tello_yaw) - pose.position.x * math.sin(self.tello_yaw)
+                global_y = self.tello_y + pose.position.z * math.sin(self.tello_yaw) + pose.position.x * math.cos(self.tello_yaw)
+                global_z = self.tello_z + pose.position.y
                 
                 self.tello_marker_positions[marker_id] = {
                     "x": global_x,
@@ -159,6 +159,10 @@ class TelloController(Node):
                     "timestamp": current_time
                 }
                 self.save_marker_positions(marker_id)
+                #self.get_logger().info(f"{global_x:.2f}, {global_y:.2f}, {global_z:.2f}")
+                #self.get_logger().info(f"{pose.position.x:.2f}, {pose.position.y:.2f}, {pose.position.z:.2f}")
+                #self.get_logger().info(f"{self.tello_x:.2f}, {self.tello_y:.2f}. {pose.position.x:.2f}, {pose.position.z:.2f}")
+
 
     def save_marker_positions(self, marker_id):
         if marker_id in self.pc_marker_positions and marker_id in self.tello_marker_positions:
@@ -183,8 +187,16 @@ class TelloController(Node):
             if marker_id not in self.marker_errors:
                 self.marker_errors[marker_id] = []
             
+            if marker_id == 'marker_2': m = self.marker2
+            else: m = self.marker4
             self.marker_errors[marker_id].append({
                 'timestamp': timestamp,
+                'error_pc_x': m[0] - pc_data['x'],
+                'error_pc_y': m[1] - pc_data['y'],
+                'error_pc_z': m[2] - pc_data['z'],
+                'error_tello_x': m[0] - tello_data['x'],
+                'error_tello_y': m[1] - tello_data['y'],
+                'error_tello_z': m[2] - tello_data['z'],
                 'error_x': error_x,
                 'error_y': error_y,
                 'error_z': error_z,
@@ -221,7 +233,7 @@ class TelloController(Node):
         max_limit = max(abs(max(y_values)), abs(min(y_values)), abs(max(x_values)), abs(min(x_values)))
         plt.xlim(-max_limit, max_limit)
         plt.ylim(-max_limit, max_limit)
-        plt.axis('equal')
+        #plt.axis('equal')
         xy_plot_path = os.path.join(self.data_dir, f"xy_trajectory_{time.strftime('%Y%m%d')}.png")
         plt.savefig(xy_plot_path)
         plt.close()
@@ -245,19 +257,25 @@ class TelloController(Node):
                 continue
                 
             timestamps = [entry['timestamp'] - errors[0]['timestamp'] for entry in errors]
-            error_x = [entry['error_x'] for entry in errors]
-            error_y = [entry['error_y'] for entry in errors]
-            error_z = [entry['error_z'] for entry in errors]
+            error_pc_x = [entry['error_pc_x'] for entry in errors]
+            error_pc_y = [entry['error_pc_y'] for entry in errors]
+            error_pc_z = [entry['error_pc_z'] for entry in errors]
+            error_tello_x = [entry['error_tello_x'] for entry in errors]
+            error_tello_y = [entry['error_tello_y'] for entry in errors]
+            error_tello_z = [entry['error_tello_z'] for entry in errors]
             euclidean_errors = [entry['euclidean_error'] for entry in errors]
             
             plt.figure(figsize=(12, 8))
             plt.subplot(2, 1, 1)
-            plt.plot(timestamps, error_x, 'r-', label='X Error')
-            plt.plot(timestamps, error_y, 'g-', label='Y Error')
-            plt.plot(timestamps, error_z, 'b-', label='Z Error')
-            plt.title(f'Coordinate Errors for {marker_id} Over Time')
+            plt.plot(timestamps, error_pc_x, 'r-', label='X PC error')
+            plt.plot(timestamps, error_pc_y, 'g-', label='Y PC error')
+            plt.plot(timestamps, error_pc_z, 'b-', label='Z PC error')
+            plt.plot(timestamps, error_tello_x, 'r--', label='X tello error')
+            plt.plot(timestamps, error_tello_y, 'g--', label='Y tello error')
+            plt.plot(timestamps, error_tello_z, 'b--', label='Z tello error')
+            plt.title(f'Coordinate measure for {marker_id} Over Time')
             plt.xlabel('Time (seconds)')
-            plt.ylabel('Error (meters)')
+            plt.ylabel('Measure (meters)')
             plt.legend()
             plt.grid(True)
             
@@ -270,7 +288,7 @@ class TelloController(Node):
             plt.grid(True)
             
             plt.tight_layout()
-            error_plot_path = os.path.join(self.data_dir, f"{marker_id}_errors_{time.strftime('%Y%m%d_%H%M%S')}.png")
+            error_plot_path = os.path.join(self.data_dir, f"{marker_id}_errors.png")
             plt.savefig(error_plot_path)
             plt.close()
             
@@ -310,11 +328,11 @@ class TelloController(Node):
     
         error_x = self.target_x - self.tello_x
         error_y = self.target_y - self.tello_y
-        error_z = self.target_z - self.tello_z - 0.1
+        error_z = self.target_z - self.tello_z - 0.1 # for have better visualization of marker
         distance = self.dist_from_tello({"x": self.target_x, "y": self.target_y, "z": self.target_z})
         error_yaw = (math.atan2(error_y, error_x) - self.tello_yaw + math.pi) % (2 * math.pi) - math.pi
 
-        if error_yaw < self.yaw_tolerance and distance < 0.2 and self.flag_tello_aruco:
+        if error_yaw < (self.yaw_tolerance * 2) and distance < 0.3 and self.flag_tello_aruco:
             if self.image is None: self.get_logger().info(f"Video not received")
             else:
                 try:
@@ -329,10 +347,14 @@ class TelloController(Node):
             cmd.linear.x = 0.0
             if abs(error_yaw) >= self.yaw_tolerance: cmd.linear.y = 0.0
             elif 0.05 < distance < 0.3:
-                min_speed = 0.20 * self.linear_speed
+                min_speed = 0.40 * self.linear_speed
                 cmd.linear.y = min_speed + (self.linear_speed - min_speed) * np.clip(distance, 0.0, 1.0)
             else: cmd.linear.y = self.linear_speed * np.clip(distance, 0.0, 1.0)
             cmd.linear.z = self.linear_speed * np.clip(error_z, -1.0, 1.0)
+            # if 0.1 < error_yaw < 0.7:
+            #     min_speed = 0.40 * self.angular_speed
+            #     cmd.angular.z = min_speed + (self.angular_speed - min_speed) * np.clip(error_yaw, -1.0, 1.0)
+            # else: cmd.angular.z = self.angular_speed * np.clip(error_yaw, -1.0, 1.0)
             cmd.angular.z = - self.angular_speed * np.clip(error_yaw, -1.0, 1.0)
 
             #self.get_logger().info(f'X: {error_x:.1f}, Y: {error_y:.1f}, Z: {error_z:.1f}, YAW: {error_yaw:.1f}.')
