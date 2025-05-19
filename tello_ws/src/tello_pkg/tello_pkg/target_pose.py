@@ -21,7 +21,6 @@ class TelloController(Node):
         self.image_tello_sub = self.create_subscription(Image, 'tello/image_raw/Image', self.camera_callback, 10)
 
         # PID's parameters
-        self.kp, self.ki, self.kd = 1.5, 0.05, 0.2
         self.error_sum_x = self.error_sum_y = self.error_sum_z = self.error_sum_yaw = 0.0
         self.last_error_x = self.last_error_y = self.last_error_z = self.last_error_yaw = 0.0
 
@@ -39,7 +38,7 @@ class TelloController(Node):
 
         # Timeout marker
         self.last_marker_time = time.time()
-        self.marker_timeout = 1.0  # sec
+        self.marker_timeout = 3.0  # sec
 
         #Timeout vicon
         self.last_vicon_time = 0
@@ -351,10 +350,6 @@ class TelloController(Node):
                 cmd.linear.y = min_speed + (self.linear_speed - min_speed) * np.clip(distance, 0.0, 1.0)
             else: cmd.linear.y = self.linear_speed * np.clip(distance, 0.0, 1.0)
             cmd.linear.z = self.linear_speed * np.clip(error_z, -1.0, 1.0)
-            # if 0.1 < error_yaw < 0.7:
-            #     min_speed = 0.40 * self.angular_speed
-            #     cmd.angular.z = min_speed + (self.angular_speed - min_speed) * np.clip(error_yaw, -1.0, 1.0)
-            # else: cmd.angular.z = self.angular_speed * np.clip(error_yaw, -1.0, 1.0)
             cmd.angular.z = - self.angular_speed * np.clip(error_yaw, -1.0, 1.0)
 
             #self.get_logger().info(f'X: {error_x:.1f}, Y: {error_y:.1f}, Z: {error_z:.1f}, YAW: {error_yaw:.1f}.')
